@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "kanit";
+  text-decoration: none;
+}
+
+.sidebar {
+  height: 100vh;
+  width: 120px;
+  overflow: hidden;
+  background-color: #F1F5FB;
+  color: #504f4f;
+  position: fixed;
+}
+
+.sidebarItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  margin-top: 1rem;
+}
+.sidebarItems div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0.3rem;
+  border-radius: 16px;
+  color: #333;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.sidebarItems div:hover {
+  cursor: pointer;
+  background-color: #347CFF;
+  color: #F1F5FB;
+}
+.sidebarItems div:hover p, .sidebarItems div:hover i {
+  color: #F1F5FB;
+}
+.sidebarItems div p {
+  font-size: 0.875rem;
+  color: #333;
+}
+.sidebarItems div i {
+  color: #333;
+}
+.sidebarItems div a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+}
+.sidebarItems div button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+}
+.sidebarItems div button:hover {
+  cursor: pointer;
+}
+
+.SKNextHeader {
+  padding-left: 2rem;
+}
+.SKNextHeader h1 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+
+.SKNextPageContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.PageItems {
+  display: flex;
+  flex-direction: column;
+  margin-left: 120px;
+}
+
+.schedule-container {
+  font-family: "Inter", sans-serif;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.schedule-container h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 140px repeat(10, minmax(100px, 1fr));
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.schedule-grid .time-header {
+  background: #f0f2f5;
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #334155;
+}
+.schedule-grid .time-header span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #64748b;
+  margin-top: 4px;
+}
+.schedule-grid .day-label {
+  background: #dcf0ff;
+  padding: 6px;
+  height: -moz-min-content;
+  height: min-content;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 600;
+  color: rgb(0, 96.5714285714, 169);
+}
+.schedule-grid .day-label span {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 0.5px;
+}
+.schedule-grid .slot {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  height: 55px;
+  transition: all 0.2s ease-in-out;
+}
+.schedule-grid .slot:hover {
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  background-color: #fcfcfc;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.schedule-grid .slot.has-class {
+  background: #fff;
+  border-left: 4px solid #3b82f6;
+  padding: 8px;
+  font-size: 0.85rem;
+}
+
+.schedule-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.schedule-grid::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.subjects {
+  padding-left: 2rem;
+}
+.subjects h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+
+.activities {
+  padding-left: 2rem;
+}
+.activities h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+.activities .activitiesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.activities .activityItem {
+  background-color: #dcf0ff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.activities .activityItem:hover {
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  background-color: #ffdce5;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.activities .activityItem h3 {
+  color: rgb(0, 96.5714285714, 169);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-family: "Kanit";
+  line-height: 1.4;
+}
+.activities .activityItem a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.activities .activityItem a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .activities .activitiesContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .activities .activitiesContainer {
+    grid-template-columns: 1fr;
+  }
+}/*# sourceMappingURL=styles.css.map */

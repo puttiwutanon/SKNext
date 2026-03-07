@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+$bg-light-blue: #dcf0ff;
+$bg-pink: #ffdce5;
+$bg-header: #f0f2f5;
+$border-color: #e2e8f0;
+$text-main: #334155;
+$text-muted: #64748b;
+$radius: 12px;
+
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: 'kanit';
+    text-decoration: none;
+}
+
+.sidebar{
+    height: 100vh;
+    width: 120px;
+    overflow: hidden;
+    background-color: #F1F5FB;
+    color: #504f4f;
+    position: fixed;
+}
+
+.sidebarItems{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    margin-top: 1rem;
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        margin: 0.3rem;
+        border-radius: 16px;
+        color: #333;
+        width: fit-content;
+        &:hover{
+            cursor: pointer;
+            background-color: #347CFF;
+            color: #F1F5FB;
+            p, i{
+                color: #F1F5FB;
+            }
+        }
+        p{
+            font-size: 0.875rem;
+            color: #333;
+        }
+        i{
+            color: #333;
+        }
+        a{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            width: 80px; 
+        }
+        button{
+            background-color: transparent;
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.SKNextHeader{
+    padding-left: 2rem;
+    h1{
+        color: $text-main;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: 'Kanit';
+    }
+}
+
+.SKNextPageContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.PageItems{
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px;
+}
+
+.schedule-container {
+  font-family: 'Inter', sans-serif; // Or your preferred Thai font
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h2 {
+    color: $text-main;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+.schedule-grid {
+  display: grid;
+  // 1st column fixed for Day labels, then 10 flexible columns for slots
+  grid-template-columns: 140px repeat(10, minmax(100px, 1fr));
+  gap: 8px;
+  overflow-x: auto; // Crucial for mobile viewing
+  padding-bottom: 10px;
+
+  // Header Time Slots
+  .time-header {
+    background: $bg-header;
+    padding: 4px 8px;
+    border-radius: $radius;
+    text-align: center;
+    font-weight: 600;
+    color: $text-main;
+
+    span {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: $text-muted;
+      margin-top: 4px;
+    }
+  }
+
+  // Side Day Labels
+  .day-label {
+    background: $bg-light-blue;
+    padding: 6px;
+    height: min-content;
+    border-radius: $radius;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 600;
+    color: darken($bg-light-blue, 60%);
+
+    span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      margin-top: 0.5px;
+    }
+  }
+
+  // The Empty Slots
+  .slot {
+    background: #fff;
+    border: 1px solid $border-color;
+    border-radius: $radius;
+    height: 55px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      border-color: darken($border-color, 20%);
+      background-color: #fcfcfc;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    // When you eventually add a class:
+    &.has-class {
+       background: #fff;
+       border-left: 4px solid #3b82f6; // A nice accent color
+       padding: 8px;
+       font-size: 0.85rem;
+    }
+  }
+}
+
+// Styling the scrollbar to match the clean aesthetic
+.schedule-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.schedule-grid::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.subjects{
+    padding-left: 2rem;
+    h2  {
+        color: $text-main;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: 'Kanit';
+    }
+}
+
+.activities {
+    padding-left: 2rem;
+
+    h2 {
+        color: $text-main;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: 'Kanit';
+    }
+
+    .activitiesContainer {
+        display: grid;
+        // This creates exactly 3 columns of equal width
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 1.5rem; // Increased gap for a cleaner look
+    }
+
+    .activityItem {
+        background-color: $bg-light-blue;
+        border-radius: $radius;
+        padding: 1.5rem; // Slightly more padding
+        transition: all 0.2s ease-in-out;
+        
+        // Remove 'width: 30%' and 'margin-bottom' as Grid handles this now
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &:hover {
+            border-color: darken($border-color, 20%);
+            background-color: $bg-pink;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h3 {
+            color: darken($bg-light-blue, 60%);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-family: 'Kanit';
+            line-height: 1.4;
+        }
+
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// Responsive Tweak: 2 columns on tablets, 1 on phones
+@media (max-width: 1024px) {
+    .activities .activitiesContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .activities .activitiesContainer {
+        grid-template-columns: 1fr;
+    }
+}
