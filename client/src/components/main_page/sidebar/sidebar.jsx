@@ -13,7 +13,7 @@ function Sidebar() {
                 </div>
                 <div>
                     <a href="/SKNext">
-                        <img src="ตราเสมา.png" alt="เสมาpic" width={'15%'} height={'15%'}/>
+                        <img src="/ตราเสมา.png" alt="เสมาpic" width={'15%'} height={'15%'}/>
                         <p>SKNext</p>
                     </a>
                 </div>
@@ -36,12 +36,6 @@ function Sidebar() {
                     </a>
                 </div>
                 <div>
-                    <a href="/services">
-                        <i class="fa-solid fa-cogs"></i>
-                        <p>บริการ</p>
-                    </a>
-                </div>
-                <div>
                     <a href="/profile">
                         <i class="fa-solid fa-user"></i>
                         <p>บัญชีผู้ใช้</p>
@@ -49,7 +43,7 @@ function Sidebar() {
                 </div>
             </div>
 
-            <div className="sidebarItems" style={{marginTop: '2.5rem'}}>
+            <div className="sidebarItems" style={{marginTop: '5rem'}}>
                 <div>
                     <a href="/search">
                         <i class="fa-solid fa-language"></i>

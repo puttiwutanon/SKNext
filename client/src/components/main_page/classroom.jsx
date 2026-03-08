@@ -1,4 +1,6 @@
 import React from 'react'
+import Sidebar from './sidebar/sidebar'
+import '../../styles.scss'
 
 function Classroom() {
   return (

@@ -71,12 +71,20 @@
 
 .SKNextHeader {
   padding-left: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .SKNextHeader h1 {
   color: #334155;
-  margin-bottom: 1.5rem;
   font-weight: 600;
   font-family: "Kanit";
+}
+.SKNextHeader a {
+  color: #333;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .SKNextPageContainer {
@@ -224,6 +232,171 @@
 }
 .activities .activityItem a:hover {
   text-decoration: underline;
+}
+
+.profileSidebar {
+  height: 100vh;
+  width: 220px;
+  overflow: hidden;
+  color: #504f4f;
+  position: fixed;
+  border-right: 1px solid #e2e8f0;
+}
+.profileSidebar div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 16px;
+  color: #333;
+  margin-left: 2rem;
+}
+.profileSidebar div:hover {
+  cursor: pointer;
+  background-color: #dcf0ff;
+}
+.profileSidebar div:hover p, .profileSidebar div:hover i {
+  color: rgb(0, 96.5714285714, 169);
+}
+.profileSidebar div p {
+  font-size: 1rem;
+  color: #333;
+}
+.profileSidebar div i {
+  color: #333;
+}
+.profileSidebar div a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 180px;
+  padding: 0.5rem;
+}
+
+.profileInfo {
+  margin-left: 15rem;
+}
+
+.contactInfo .contactInfoItems button, .contactInfo .aboutYouItems button, .aboutYou .contactInfoItems button, .aboutYou .aboutYouItems button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+.contactInfo .contactInfoItems button:hover, .contactInfo .aboutYouItems button:hover, .aboutYou .contactInfoItems button:hover, .aboutYou .aboutYouItems button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.contactInfo .contactInfoItems p, .contactInfo .aboutYouItems p, .aboutYou .contactInfoItems p, .aboutYou .aboutYouItems p {
+  margin-top: 0.5rem;
+  color: #64748b;
+}
+
+.aboutYouHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.aboutYouHeader h2, .aboutYouHeader h4 {
+  color: #334155;
+  font-weight: 600;
+  font-family: "Kanit";
+  margin-left: 2rem;
+}
+
+.aboutYouformItem {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  border-bottom: #e2e8f0 1px solid;
+  padding: 1.5rem 1rem;
+}
+.aboutYouformItem label {
+  color: #334155;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.aboutYouformItem input, .aboutYouformItem textarea, .aboutYouformItem select {
+  padding: 0.75rem;
+  margin: 10px;
+  width: 12.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+.aboutYouformItem input:focus, .aboutYouformItem textarea:focus, .aboutYouformItem select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+.aboutYouformItem div {
+  display: flex;
+  flex-direction: column;
+}
+
+.CheerPracticeCheckContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.CheerPracticeCheck {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: #e2e8f0 1px solid;
+  border-radius: 12px;
+  width: 80%;
+}
+.CheerPracticeCheck h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+.CheerPracticeCheck .CheerPracticeCheckHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.CheerPracticeCheck .CheerPracticeCheckHeader button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.CheerPracticeCheck .CheerPracticeCheckHeader button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.CheerPracticeCheck .CheerPracticeCheckBody {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F5FB;
+  width: 100%;
+  height: 500px;
 }
 
 @media (max-width: 1024px) {

@@ -1,6 +1,6 @@
 import React from 'react'
-import Sidebar from './sidebar'
-import '../../../styles.scss'
+import Sidebar from './sidebar/sidebar'
+import '../../styles.scss'
 
 function SKNext() {
   return (
@@ -101,7 +101,7 @@ function SKNext() {
               <div className="activitiesContainer">
                 <div className="activityItem">
                   <h3>การเช็คชื่อเข้าซ้อมเชียร์</h3>
-                  <a href="">ดูการเช็คชื่อ</a>
+                  <a href="/cheerPracticeCheck">ดูการเช็คชื่อ</a>
                 </div>
 
                 <div className="activityItem">
@@ -111,7 +111,7 @@ function SKNext() {
 
                 <div className="activityItem">
                   <h3>การจองโต๊ะในโรงอาหาร</h3>
-                  <a href="">จองโต๊ะ</a>
+                  <a href="/tableRevervation">จองโต๊ะ</a>
                 </div>
               </div>
             </div>

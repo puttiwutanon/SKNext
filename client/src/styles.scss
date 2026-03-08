@@ -79,11 +79,19 @@ $radius: 12px;
 
 .SKNextHeader{
     padding-left: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     h1{
         color: $text-main;
-        margin-bottom: 1.5rem;
         font-weight: 600;
         font-family: 'Kanit';
+    }
+    a{
+        color: #333;
+        margin: 1rem;
+        display: flex;
+        align-items: center;
     }
 }
 
@@ -253,6 +261,179 @@ $radius: 12px;
                 text-decoration: underline;
             }
         }
+    }
+}
+
+.profileSidebar{
+    height: 100vh;
+    width: 220px;
+    overflow: hidden;
+    color: #504f4f;
+    position: fixed;
+    border-right: 1px solid $border-color;
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        border-radius: 16px;
+        color: #333;
+        margin-left: 2rem;
+        &:hover{
+            cursor: pointer;
+            background-color: $bg-light-blue;
+            p, i{
+                color: darken($bg-light-blue, 60%)
+            }
+        }
+        p{
+            font-size: 1rem;
+            color: #333;
+        }
+        i{
+            color: #333;
+        }
+        a{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start; 
+            width: 180px; 
+            padding: 0.5rem;
+        }
+    }    
+}
+
+.profileInfo{
+    margin-left: 15rem;
+}
+
+.contactInfo, .aboutYou{
+    .contactInfoItems, .aboutYouItems{
+        button{
+            background-color: transparent;
+            border: 1px solid $border-color;
+            border-radius: $radius;
+            padding: 1rem;
+            color: #333;
+            font-size: 0.9rem;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                background-color: $bg-light-blue;
+                border-color: darken($border-color, 20%);
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            }
+        }
+        p{
+            margin-top: 0.5rem;
+            color: $text-muted;
+        }
+    }
+}
+
+.aboutYouHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    h2, h4{
+        color: $text-main;
+        font-weight: 600;
+        font-family: 'Kanit';
+        margin-left: 2rem;
+    }
+}
+
+.aboutYouformItem{
+    display: grid; // Changed from flex to grid
+    grid-template-columns: repeat(3, 1fr); // Three equal columns
+    gap: 1.5rem; // Use gap instead of individual margins for better alignment
+    margin-top: 1rem;
+    border-bottom: $border-color 1px solid;
+    padding: 1.5rem 1rem;
+    label{
+        color: $text-main;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    input, textarea, select{
+        padding: 0.75rem;
+        margin: 10px;
+        width: 12.50rem;
+        border: 1px solid $border-color;
+        border-radius: $radius;
+        font-size: 0.9rem;
+        transition: all 0.2s ease-in-out;
+
+        &:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.2);
+        }
+    }
+    div{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.CheerPracticeCheckContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.CheerPracticeCheck{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: $border-color 1px solid;
+    border-radius: $radius;
+    width: 80%;
+    h2{
+        color: $text-main;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: 'Kanit';
+    }
+    .CheerPracticeCheckHeader{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        button{
+            background-color: transparent;
+            border: 1px solid $border-color;
+            padding: 1rem;
+            color: #333;
+            font-size: 0.9rem;
+            width: 100%;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                background-color: $bg-light-blue;
+                border-color: darken($border-color, 20%);
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            }
+        }
+    }
+    .CheerPracticeCheckBody{
+        display: flex;
+        flex-direction: column;
+        background-color: #F1F5FB;
+        width: 100%;
+        height: 500px;
     }
 }
 
