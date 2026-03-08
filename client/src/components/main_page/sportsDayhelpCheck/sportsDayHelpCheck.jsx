@@ -7,7 +7,7 @@ function SportsDayHelpCheck() {
     <>
         <div className='SKNextPageContainer'>
             <Sidebar />
-            <div className='PageItems'>
+            <div className='PageItems' style={{width: '100%'}}>
                 <div className="SKNextHeader">
                     <a href="/SKNext">
                         <i class="fa-solid fa-arrow-left"></i>

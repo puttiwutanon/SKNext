@@ -12,6 +12,7 @@ import Contacts from './components/main_page/profilePage/contacts';
 import Awards from './components/main_page/profilePage/awards';
 import TableRevervation from './components/main_page/canteenTableRevervation/tableRevervation';
 import CheerPracticeCheck from './components/main_page/cheerPracticeCheck/cheerPracticeCheck';
+import SportsDayHelpCheck from './components/main_page/sportsDayhelpCheck/sportsDayHelpCheck';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/cheerPracticeCheck",
     element: <CheerPracticeCheck/>,
+  },
+    {
+    path: "/sportsDayHelpCheck",
+    element: <SportsDayHelpCheck/>,
   },
 ]);
 

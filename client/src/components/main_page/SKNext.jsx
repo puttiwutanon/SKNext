@@ -106,7 +106,7 @@ function SKNext() {
 
                 <div className="activityItem">
                   <h3>การเช็คชื่อเข้าช่วยงานกีฬาสี</h3>
-                  <a href="">ดูการเช็คชื่อ</a>
+                  <a href="/sportsDayHelpCheck">ดูการเช็คชื่อ</a>
                 </div>
 
                 <div className="activityItem">
