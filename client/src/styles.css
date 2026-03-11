@@ -321,12 +321,12 @@
   border-bottom: #e2e8f0 1px solid;
   padding: 1.5rem 1rem;
 }
-.aboutYouformItem label {
+.aboutYouformItem label, .aboutYouformItem select, .aboutYouformItem option {
   color: #334155;
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
-.aboutYouformItem input, .aboutYouformItem textarea, .aboutYouformItem select {
+.aboutYouformItem input, .aboutYouformItem textarea, .aboutYouformItem select, .aboutYouformItem option {
   padding: 0.75rem;
   margin: 10px;
   width: 12.5rem;
@@ -335,7 +335,7 @@
   font-size: 0.9rem;
   transition: all 0.2s ease-in-out;
 }
-.aboutYouformItem input:focus, .aboutYouformItem textarea:focus, .aboutYouformItem select:focus {
+.aboutYouformItem input:focus, .aboutYouformItem textarea:focus, .aboutYouformItem select:focus, .aboutYouformItem option:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
@@ -397,6 +397,164 @@
   background-color: #F1F5FB;
   width: 100%;
   height: 500px;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+.searchContainer .SearchStudents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: #e2e8f0 1px solid;
+  border-radius: 12px;
+  width: 80%;
+  color: #334155;
+}
+.searchContainer .SearchStudents h2 {
+  color: #334155;
+  font-weight: 600;
+  font-family: "Kanit";
+  align-self: center;
+}
+.searchContainer .SearchStudents .searchHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.searchContainer .SearchStudents .searchHeader button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.searchContainer .SearchStudents .searchHeader button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.searchContainer .SearchStudents .searchForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F5FB;
+  width: 100%;
+}
+.searchContainer .SearchStudents .searchForm p {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  color: #64748b;
+  align-self: center;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 1.5rem 1rem;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem label {
+  color: #334155;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem input, .searchContainer .SearchStudents .searchForm .SearchFormItem textarea, .searchContainer .SearchStudents .searchForm .SearchFormItem select, .searchContainer .SearchStudents .searchForm .SearchFormItem option {
+  padding: 0.75rem;
+  width: 12.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem input:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem textarea:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem select:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem option:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem div {
+  display: flex;
+  flex-direction: column;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormButton button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormButton button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table-reservation-wrapper {
+  overflow-x: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.table-reservation-wrapper .table-grid {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 8px;
+  min-width: 400px;
+  padding-bottom: 20px;
+}
+
+.table-slot {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  height: 45px;
+  display: flex;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+}
+.table-slot button {
+  background: transparent;
+  border: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.table-slot button:hover {
+  background-color: #dcf0ff;
+}
+
+.teacherCanteen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  padding: 0.5rem;
 }
 
 @media (max-width: 1024px) {

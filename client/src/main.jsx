@@ -6,13 +6,16 @@ import SKNext from './components/main_page/SKNext';
 import News from './components/main_page/news';
 import Classroom from './components/main_page/classroom';
 import Profile from './components/main_page/profilePage/profile';
-import Search from './components/main_page/search';
+import Search from './components/main_page/searchPage/search';
 import AboutYou from './components/main_page/profilePage/aboutYou';
 import Contacts from './components/main_page/profilePage/contacts';
 import Awards from './components/main_page/profilePage/awards';
 import TableRevervation from './components/main_page/canteenTableRevervation/tableRevervation';
 import CheerPracticeCheck from './components/main_page/cheerPracticeCheck/cheerPracticeCheck';
 import SportsDayHelpCheck from './components/main_page/sportsDayhelpCheck/sportsDayHelpCheck';
+import SearchStudents from './components/main_page/searchPage/searchStudents';
+import SearchTeachers from './components/main_page/searchPage/searchTeachers';
+import SearchDocuments from './components/main_page/searchPage/searchDocuments';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,20 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <Search/>,
+    children: [
+      {
+        path: "searchStudents", // Results in /profile/about-you
+        element: <SearchStudents/>, // Create this component
+      },
+      {
+        path: "searchTeachers", // Results in /profile/contact
+        element: <SearchTeachers/>, // Create this component
+      },
+      {
+        path: "searchDocuments", // Results in /profile/awards
+        element: <SearchDocuments/>, // Create this component
+      },
+    ],
   },
   {
     path: "/profile",
@@ -61,7 +78,7 @@ const router = createBrowserRouter([
     path: "/cheerPracticeCheck",
     element: <CheerPracticeCheck/>,
   },
-    {
+  {
     path: "/sportsDayHelpCheck",
     element: <SportsDayHelpCheck/>,
   },

@@ -355,13 +355,13 @@ $radius: 12px;
     margin-top: 1rem;
     border-bottom: $border-color 1px solid;
     padding: 1.5rem 1rem;
-    label{
+    label, select, option{
         color: $text-main;
         font-weight: 500;
         margin-bottom: 0.5rem;
     }
 
-    input, textarea, select{
+    input, textarea, select, option{
         padding: 0.75rem;
         margin: 10px;
         width: 12.50rem;
@@ -436,6 +436,177 @@ $radius: 12px;
         height: 500px;
     }
 }
+
+.searchContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    .SearchStudents{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: $border-color 1px solid;
+        border-radius: $radius;
+        width: 80%;
+        color: $text-main;
+        h2{
+            color: $text-main;
+            font-weight: 600;
+            font-family: 'Kanit';
+            align-self: center;
+        }
+        .searchHeader{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            button{
+                background-color: transparent;
+                border: 1px solid $border-color;
+                padding: 1rem;
+                color: #333;
+                font-size: 0.9rem;
+                width: 100%;
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    background-color: $bg-light-blue;
+                    border-color: darken($border-color, 20%);
+                    cursor: pointer;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+            }
+        }
+        .searchForm{
+            display: flex;
+            flex-direction: column;
+            background-color: #F1F5FB;
+            width: 100%;
+            p{
+                font-size: 0.75rem;
+                margin-top: 0.5rem;
+                color: $text-muted;
+                align-self: center;
+            }  
+            .SearchFormItem{
+                display: grid; // Changed from flex to grid
+                grid-template-columns: repeat(4, 1fr); // Three equal columns
+                gap: 1.5rem; // Use gap instead of individual margins for better alignment
+                margin-top: 1rem;
+                padding: 1.5rem 1rem;
+                label{
+                    color: $text-main;
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+
+                input, textarea, select, option{
+                    padding: 0.75rem;
+                    width: 12.50rem;
+                    border: 1px solid $border-color;
+                    border-radius: $radius;
+                    font-size: 0.9rem;
+                    transition: all 0.2s ease-in-out;
+
+                    &:focus {
+                        outline: none;
+                        border-color: #3b82f6;
+                        box-shadow: 0 2px 8px rgba(59,130,246,0.2);
+                    }
+                }
+                div{
+                    display: flex;
+                    flex-direction: column;
+                }  
+            }
+            .SearchFormButton{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                margin-top: 1rem;
+                width: 100%;
+                button{
+                    background-color: transparent;
+                    border: 1px solid $border-color;
+                    padding: 1rem;
+                    color: #333;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    transition: all 0.2s ease-in-out;
+
+                    &:hover {
+                        background-color: $bg-light-blue;
+                        border-color: darken($border-color, 20%);
+                        cursor: pointer;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    }
+                }
+            }
+        }        
+    }
+    
+}
+
+// Change .table-grid to be the PARENT container
+.table-reservation-wrapper {
+    overflow-x: auto; // Only one scrollbar here
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+
+    // This ensures the grid stays wide enough for all 24 columns
+    .table-grid {
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        gap: 8px;
+        min-width: 400px; // (24 columns * 100px) + gaps
+        padding-bottom: 20px;
+    }
+}
+
+// Keep your styling for the slots
+.table-slot {
+    background: #fff;
+    border: 1px solid $border-color;
+    border-radius: $radius;
+    height: 45px;
+    display: flex;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+
+    button {
+        background: transparent;
+        border: none;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: $bg-light-blue;
+        }
+    }
+}
+
+.teacherCanteen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $border-color;
+    margin-bottom: 2rem;
+    border-radius: $radius;
+    padding: 0.5rem;
+}
+
+
 
 // Responsive Tweak: 2 columns on tablets, 1 on phones
 @media (max-width: 1024px) {
