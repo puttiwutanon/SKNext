@@ -2,132 +2,27 @@ import React from 'react'
 import Sidebar from '../sidebar/sidebar';
 import '../../../styles.scss'
 
-function TableReservationRow2() {
+function TableReservationRow2({ selectedTable, onSelectTable }) {
+  const tables = [
+    '1B','2B','3B','4B','5B','6B','7B','8B','9B','10B',
+    '11B','12B','13B','14B','15B','16B','17B','18B','19B','20B',
+    '21B','22B','23B','24B'
+  ];
+
   return (
-    <>
-        <div class="table-grid">
-                <div class="table-slot">
-                    <button>
-                        <p>1B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>2B</p>
-                    </button>                    
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>3B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>4B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>5B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>6B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>7B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>8B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>9B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>10B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>11B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>12B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>13B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>14B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>15B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>16B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>17B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>18B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>19B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>20B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>21B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>22B</p>
-                    </button>
-                </div> 
-                <div class="table-slot">
-                    <button>
-                        <p>23B</p>
-                    </button>
-                </div>
-                <div class="table-slot">
-                    <button>
-                        <p>24B</p>
-                    </button>
-                </div> 
+    <div className="table-grid">
+      {tables.map((code) => (
+        <div
+          key={code}
+          className={`table-slot ${selectedTable === code ? 'selected' : ''}`}
+          onClick={() => onSelectTable(selectedTable === code ? null : code)}
+        >
+          <button>
+            <p>{code}</p>
+          </button>
         </div>
-    </>
+      ))}
+    </div>
   )
 }
 
