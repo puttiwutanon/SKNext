@@ -30,30 +30,30 @@ function SearchStudents() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="name"></label>
-                                    <input type="text" id='name' placeholder='ค้นหาด้วยชื่อเล่น'/>
+                                    <label htmlFor="nickname"></label>
+                                    <input type="text" id='nickname' placeholder='ค้นหาด้วยชื่อเล่น'/>
                                     <p>ป้อนชื่อเล่นบางส่วนหรือทั้งหมด</p>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="name"></label>
-                                    <input type="text" id='name' placeholder='ระดับชั้น'/>
+                                    <label htmlFor="grade"></label>
+                                    <input type="text" id='grade' placeholder='ระดับชั้น'/>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="name"></label>
-                                    <input type="text" id='name' placeholder='ห้อง'/>
+                                    <label htmlFor="room"></label>
+                                    <input type="text" id='room' placeholder='ห้อง'/>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="name"></label>
-                                    <input type="text" id='name' placeholder='ช่องทางการติดต่อ'/>
+                                    <label htmlFor="contact"></label>
+                                    <input type="text" id='contact' placeholder='ช่องทางการติดต่อ'/>
                                     <p>ป้อนชื่อผู้ใช้ อีเมล เบอร์โทร หรือ URL ของนักเรียนอย่างครบถ้วน</p>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="name"></label>
-                                    <input type="text" id='name' placeholder='รหัสประจำตัว'/>
+                                    <label htmlFor="studentId"></label>
+                                    <input type="text" id='studentId' placeholder='รหัสประจำตัว'/>
                                     <p>ป้อนเลขประจำตัวนักเรียน 5 หลัก</p>
                                 </div>
                             </div>

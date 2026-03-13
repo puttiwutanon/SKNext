@@ -43,7 +43,7 @@ function Sidebar() {
                 </div>
             </div>
 
-            <div className="sidebarItems" style={{marginTop: '5rem'}}>
+            <div className="sidebarItems" id="sidebar-bottom-buttons" style={{marginTop: '5rem'}}>
                 <div>
                     <a href="/search">
                         <i class="fa-solid fa-language"></i>

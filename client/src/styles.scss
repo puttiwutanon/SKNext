@@ -614,7 +614,7 @@ $radius: 12px;
 
 }
 
-.teacherCanteen{
+.teacherCanteen, .restaurantBox{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -662,6 +662,18 @@ $radius: 12px;
     }
 }
 
+.tableDivider{
+    margin-top: 1rem;
+}
+
+.table-row-wrapper{
+    display: 'flex'; 
+    flex-direction: 'column';
+    justify-content: 'center';
+    align-items: 'center';
+}
+
+
 
 
 // Responsive Tweak: 2 columns on tablets, 1 on phones
@@ -674,5 +686,263 @@ $radius: 12px;
 @media (max-width: 600px) {
     .activities .activitiesContainer {
         grid-template-columns: 1fr;
+    }
+    .sidebar{
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+        background-color: #F1F5FB;
+        color: #504f4f;
+        position: fixed;
+        bottom: 0;        /* ← anchors it to the bottom */
+        left: 0;          /* ← ensures full width from left edge */
+        z-index: 1000;
+        .sidebarItems{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            margin-top: 1rem;
+            div{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0.5rem;
+                margin: 0.3rem;
+                border-radius: 16px;
+                color: #333;
+                width: fit-content;
+                &:hover{
+                    cursor: pointer;
+                    background-color: #347CFF;
+                    color: #F1F5FB;
+                    p, i{
+                        color: #F1F5FB;
+                    }
+                }
+                p{
+                    font-size: 0.875rem;
+                    color: #333;
+                }
+                i{
+                    color: #333;
+                }
+                a{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center; 
+                    width: 80px; 
+                }
+                button{
+                    display: none;
+                }
+            }
+            #sidebar-bottom-buttons{
+                display: none;
+            }
+        }
+    }
+
+    .PageItems{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        margin-bottom: 120px;
+    }
+
+    .activities {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .CheerPracticeCheckContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+    }
+    
+    .CheerPracticeCheck{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        border: $border-color 1px solid;
+        border-radius: $radius;
+        width: 80%;
+        h2{
+            color: $text-main;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-family: 'Kanit';
+        }
+        .CheerPracticeCheckHeader{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            button{
+                background-color: transparent;
+                border: 1px solid $border-color;
+                padding: 1rem;
+                color: #333;
+                font-size: 0.9rem;
+                width: 100%;
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    background-color: $bg-light-blue;
+                    border-color: darken($border-color, 20%);
+                    cursor: pointer;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+            }
+        }
+        .CheerPracticeCheckBody{
+            display: flex;
+            flex-direction: column;
+            background-color: #F1F5FB;
+            width: 100%;
+            height: 700px;
+        }
+    }
+
+    .profileSidebar{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100% !important; 
+        color: #504f4f;
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            margin: 0.5rem;
+            border-radius: 16px;
+            color: #333;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            width: auto !important;
+            &:hover{
+                cursor: pointer;
+                background-color: $bg-light-blue;
+                p, i{
+                    color: darken($bg-light-blue, 60%)
+                }
+            }
+            p{
+                font-size: 0.75rem; 
+                color: #333;
+            }
+            i{
+                color: #333;
+            }
+            a{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start; 
+                padding: 0.5rem;     
+            }
+        }    
+    }
+    .profileInfo{
+        margin: 1rem;
+        margin-top: 5rem;
+    }
+
+    .SearchFormItem {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        
+        div {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            
+            input {
+                width: 100%;
+                padding: 0.5rem;
+                box-sizing: border-box;
+            }
+            p {
+                align-self: flex-start !important; // ← this is the fix
+                font-size: 0.75rem;
+                color: #888;
+                margin-top: 0.25rem;
+            }
+        }
+        input, textarea, select, option{
+            padding: 0.75rem;
+            width: 100% !important;
+            border: 1px solid $border-color;
+            border-radius: $radius;
+            font-size: 0.9rem;
+            transition: all 0.2s ease-in-out;
+
+            &:focus {
+                outline: none;
+                border-color: #3b82f6;
+                box-shadow: 0 2px 8px rgba(59,130,246,0.2);
+            }
+        }        
+    }
+
+    .table-grid {
+        grid-template-columns: repeat(1, minmax(30px, 1fr)) !important;
+        height: 130vh !important;
+        // This makes each row show 6 seats instead of 24
+        // so the layout naturally stacks into more rows = vertical feel
+    }
+
+    .table-reservation-wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        overflow-x: hidden;
+
+        .teacherCanteen {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .table-slot{
+        width: 35px !important;
+    }
+
+    
+    .table-row-wrapper{
+        display: flex !important; 
+        flex-direction: row-reverse !important;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .restaurantBox{
+        margin: 10px;
+    }
+
+    .table-reservation-wrapper {
+        margin-left: 0rem !important;
+        margin-top: 1rem;
+        display: flex;
+        align-items: center; // Change from center to flex-start
+        justify-content: center;
+        gap: 0.5rem;
+        overflow: hidden;
+    }
+
+    .tableDivider{
+        margin-left: 1rem;
     }
 }

@@ -57,17 +57,17 @@ function TableReservation() {
                     <div className='teacherCanteen'>
                         <p>ห้องอาหารครู</p>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className='table-row-wrapper'>
                         <TableReservationRow6 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
                         <TableReservationRow5 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
-                        <div style={{marginTop: '1rem'}}></div>
+                        <div className='tableDivider'></div>
                         <TableReservationRow4 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
                         <TableReservationRow3 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
-                        <div style={{marginTop: '1rem'}}></div>
+                        <div className='tableDivider'></div>
                         <TableReservationRow2 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
                         <TableReservationRow1 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
 
-                        <div className='teacherCanteen' style={{width: '100%'}}>
+                        <div className='restaurantBox' style={{width: '100%'}}>
                             <p>ร้านอาหาร</p>
                         </div>
                     </div>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 * {
   padding: 0%;
@@ -565,7 +566,7 @@
   font-size: 0.85rem;
 }
 
-.teacherCanteen {
+.teacherCanteen, .restaurantBox {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -609,6 +610,17 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.tableDivider {
+  margin-top: 1rem;
+}
+
+.table-row-wrapper {
+  display: "flex";
+  flex-direction: "column";
+  justify-content: "center";
+  align-items: "center";
+}
+
 @media (max-width: 1024px) {
   .activities .activitiesContainer {
     grid-template-columns: repeat(2, 1fr);
@@ -617,5 +629,243 @@
 @media (max-width: 600px) {
   .activities .activitiesContainer {
     grid-template-columns: 1fr;
+  }
+  .sidebar {
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #F1F5FB;
+    color: #504f4f;
+    position: fixed;
+    bottom: 0; /* ← anchors it to the bottom */
+    left: 0; /* ← ensures full width from left edge */
+    z-index: 1000;
+  }
+  .sidebar .sidebarItems {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    margin-top: 1rem;
+  }
+  .sidebar .sidebarItems div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin: 0.3rem;
+    border-radius: 16px;
+    color: #333;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .sidebar .sidebarItems div:hover {
+    cursor: pointer;
+    background-color: #347CFF;
+    color: #F1F5FB;
+  }
+  .sidebar .sidebarItems div:hover p, .sidebar .sidebarItems div:hover i {
+    color: #F1F5FB;
+  }
+  .sidebar .sidebarItems div p {
+    font-size: 0.875rem;
+    color: #333;
+  }
+  .sidebar .sidebarItems div i {
+    color: #333;
+  }
+  .sidebar .sidebarItems div a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+  }
+  .sidebar .sidebarItems div button {
+    display: none;
+  }
+  .sidebar .sidebarItems #sidebar-bottom-buttons {
+    display: none;
+  }
+  .PageItems {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-bottom: 120px;
+  }
+  .activities {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .CheerPracticeCheckContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+  }
+  .CheerPracticeCheck {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: #e2e8f0 1px solid;
+    border-radius: 12px;
+    width: 80%;
+  }
+  .CheerPracticeCheck h2 {
+    color: #334155;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-family: "Kanit";
+  }
+  .CheerPracticeCheck .CheerPracticeCheckHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .CheerPracticeCheck .CheerPracticeCheckHeader button {
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
+    color: #333;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+  .CheerPracticeCheck .CheerPracticeCheckHeader button:hover {
+    background-color: #dcf0ff;
+    border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  .CheerPracticeCheck .CheerPracticeCheckBody {
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F5FB;
+    width: 100%;
+    height: 700px;
+  }
+  .profileSidebar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100% !important;
+    color: #504f4f;
+  }
+  .profileSidebar div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 16px;
+    color: #333;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    width: auto !important;
+  }
+  .profileSidebar div:hover {
+    cursor: pointer;
+    background-color: #dcf0ff;
+  }
+  .profileSidebar div:hover p, .profileSidebar div:hover i {
+    color: rgb(0, 96.5714285714, 169);
+  }
+  .profileSidebar div p {
+    font-size: 0.75rem;
+    color: #333;
+  }
+  .profileSidebar div i {
+    color: #333;
+  }
+  .profileSidebar div a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem;
+  }
+  .profileInfo {
+    margin: 1rem;
+    margin-top: 5rem;
+  }
+  .SearchFormItem {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .SearchFormItem div {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .SearchFormItem div input {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+  .SearchFormItem div p {
+    align-self: flex-start !important;
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.25rem;
+  }
+  .SearchFormItem input, .SearchFormItem textarea, .SearchFormItem select, .SearchFormItem option {
+    padding: 0.75rem;
+    width: 100% !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+  }
+  .SearchFormItem input:focus, .SearchFormItem textarea:focus, .SearchFormItem select:focus, .SearchFormItem option:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  }
+  .table-grid {
+    grid-template-columns: repeat(1, minmax(30px, 1fr)) !important;
+    height: 130vh !important;
+  }
+  .table-reservation-wrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .table-reservation-wrapper .teacherCanteen {
+    width: 100%;
+    height: auto;
+  }
+  .table-slot {
+    width: 35px !important;
+  }
+  .table-row-wrapper {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .restaurantBox {
+    margin: 10px;
+  }
+  .table-reservation-wrapper {
+    margin-left: 0rem !important;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+  .tableDivider {
+    margin-left: 1rem;
   }
 }/*# sourceMappingURL=styles.css.map */
