@@ -549,7 +549,7 @@
 .table-grid .table-slot {
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   height: 35px;
   transition: all 0.2s ease-in-out;
 }
@@ -619,6 +619,243 @@
   flex-direction: "column";
   justify-content: "center";
   align-items: "center";
+}
+
+.notes-1 {
+  align-self: center;
+}
+
+.tableReservationButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.tableReservationButtonWrapper h2 {
+  color: #334155;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+.tableReservationButtonWrapper .tableReservationButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+.qr-popup-overlay h2, .qr-popup-overlay p {
+  color: #334155;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.qr-popup {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: min(90vw, 380px);
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.25s ease;
+}
+.qr-popup h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+}
+.qr-popup p {
+  margin: 0.25rem 0;
+  color: #444;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.qr-popup-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+  padding: 0;
+}
+
+.qr-countdown {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2a7a2a;
+  margin: 0.5rem 0 1rem;
+  transition: color 0.3s;
+}
+.qr-countdown.urgent {
+  color: #c0392b;
+  animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+.qr-scanner-viewport {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1rem;
+  background: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+
+.qr-scanner-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #1a73e8;
+  border-style: solid;
+  border-width: 0;
+}
+.qr-scanner-corner.top-left {
+  top: 8px;
+  left: 8px;
+  border-top-width: 3px;
+  border-left-width: 3px;
+  border-radius: 4px 0 0 0;
+}
+.qr-scanner-corner.top-right {
+  top: 8px;
+  right: 8px;
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-radius: 0 4px 0 0;
+}
+.qr-scanner-corner.bottom-left {
+  bottom: 8px;
+  left: 8px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-radius: 0 0 0 4px;
+}
+.qr-scanner-corner.bottom-right {
+  bottom: 8px;
+  right: 8px;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+  border-radius: 0 0 4px 0;
+}
+
+.qr-scan-line {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #1a73e8, transparent);
+  animation: scan 2s linear infinite;
+  top: 12px;
+}
+
+@keyframes scan {
+  0% {
+    top: 12px;
+  }
+  50% {
+    top: calc(100% - 12px);
+  }
+  100% {
+    top: 12px;
+  }
+}
+.qr-hint {
+  font-size: 0.75rem;
+  color: #888;
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.qr-success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  background: #e6f9ee;
+  border-radius: 8px;
+}
+.qr-success-state p {
+  font-weight: 700;
+  color: #2a7a2a;
+  font-size: 1.1rem;
+}
+
+.qr-success-icon {
+  font-size: 3rem;
+  color: #2a7a2a;
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.qr-error {
+  font-size: 0.85rem;
+  color: #c0392b;
+  padding: 1rem;
 }
 
 @media (max-width: 1024px) {
@@ -867,5 +1104,23 @@
   }
   .tableDivider {
     margin-left: 1rem;
+  }
+  .tableReservationButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .tableReservationButtonWrapper h2 {
+    color: #334155;
+    font-weight: 600;
+    font-family: "Kanit";
+  }
+  .tableReservationButtonWrapper .tableReservationButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }/*# sourceMappingURL=styles.css.map */
