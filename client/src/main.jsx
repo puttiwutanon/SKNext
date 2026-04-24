@@ -16,11 +16,20 @@ import SportsDayHelpCheck from './components/main_page/sportsDayhelpCheck/sports
 import SearchStudents from './components/main_page/searchPage/searchStudents';
 import SearchTeachers from './components/main_page/searchPage/searchTeachers';
 import SearchDocuments from './components/main_page/searchPage/searchDocuments';
+import LoginPage from './components/auth/login/loginPage';
+import ProtectedRoute from './components/auth/protectedRoutes';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SKNext/>,
+    element: <LoginPage/>,
+  },
+  {
+    path: "/sknext",
+    element: 
+    <ProtectedRoute>
+      <SKNext/>
+    </ProtectedRoute>,
   },
   {
     path: "/news",

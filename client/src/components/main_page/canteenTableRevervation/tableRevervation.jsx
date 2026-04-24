@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
+import { db, auth } from '../../../firebase/firebaseConfig';
 import Sidebar from '../sidebar/sidebar';
 import '../../../styles.scss'
 import TableReservationRow1 from './tableReservationRow-1';
@@ -15,6 +17,7 @@ function TableReservation() {
     const [timeLeft, setTimeLeft] = useState(null);
     const [cameraError, setCameraError] = useState(null);
     const [scannedData, setScannedData] = useState(null);
+    const [dbTables, setDBTables] = useState([]);
  
     const timerRef = useRef(null);
     const videoRef = useRef(null);
@@ -131,39 +134,104 @@ function TableReservation() {
  
     // ── Handlers ───────────────────────────────────────────────────
     const handleReservation = async () => {
-        if (!selectedTable) return;
-        const reservationData = { tableCode: selectedTable };
-        console.log('Reservation data ready:', reservationData);
-        // TODO: call API here when backend is ready
+        if (!selectedTable || !auth.currentUser) return;
+
+        const tableRef = doc(db, 'tables', selectedTable);
+        
+        try {
+            await updateDoc(tableRef, {
+                status: 'pending',
+                reservedBy: auth.currentUser.uid,
+                timerStartsAt: new Date()
+            });
+            
+            setPendingTable(selectedTable);   
+            startCountdown();
+        } catch (error) {
+            console.error("Error reserving table: ", error);
+        }
     };
  
     const handleConfirm = () => {
         if (!selectedTable) return;
-        setPendingTable(selectedTable);
         setShowQRPopup(true);
         startCountdown();
     };
- 
-    const handleQRSuccess = (data) => {
-        stopCamera();
-        setScannedData(data);
-        setPendingTable(null);
-        setTimeLeft(null);
-        clearInterval(timerRef.current);
- 
-        // TODO: validate `data` against your backend here
-        console.log('QR scanned:', data);
- 
-        setTimeout(() => {
-            setShowQRPopup(false);
+
+    const handleCancel = async () => {
+        // 1. We only care about canceling the table that is currently pending
+        if (!pendingTable) return;
+
+        console.log("Canceling reservation for:", pendingTable);
+        const tableRef = doc(db, 'tables', pendingTable);
+
+        try {
+            // 2. Tell Firebase to change the status back to 'available'
+            await updateDoc(tableRef, {
+                status: 'available',
+                reservedBy: null,
+                timerStartsAt: null
+            });
+
+            // 3. Clear all the timers and states on the screen
+            setPendingTable(null);
             setSelectedTable(null);
-            setScannedData(null);
-        }, 1500);
+            setTimeLeft(null);
+            clearInterval(timerRef.current);
+            
+            console.log("Cancellation complete!");
+        } catch (error) {
+            console.error("Error canceling table: ", error);
+        }
+    };
+ 
+    const handleQRSuccess = async (data) => {
+        // 1. Extract the table code from the scanned URL
+        // Your URL: http://192.168.1.111:5173/tableRevervation?table=1A
+        const url = new URL(data);
+        const scannedTableCode = url.searchParams.get('table');
+
+        // 2. Validate: Is this the table they actually reserved?
+        if (scannedTableCode === pendingTable) {
+            const tableRef = doc(db, 'tables', pendingTable);
+            
+            await updateDoc(tableRef, {
+                status: 'occupied',
+                // The table is now officially taken!
+            });
+
+            stopCamera();
+            setScannedData("Success!");
+            setPendingTable(null);
+            setTimeLeft(null);
+            clearInterval(timerRef.current);
+            
+            setTimeout(() => {
+                setShowQRPopup(false);
+                setSelectedTable(null);
+            }, 1500);
+        } else {
+            alert(`ผิดโต๊ะ! คุณจองโต๊ะ ${pendingTable} แต่สแกนโต๊ะ ${scannedTableCode}`);
+            // Keep camera running so they can try again
+        }
     };
  
     const handleClosePopup = () => {
         setShowQRPopup(false);
     };
+
+    useEffect(()=>{
+    const unsubscribe = onSnapshot(collection(db, 'tables'), (snapshot) => {
+            const tableMap = {};
+            snapshot.docs.forEach(doc => {
+                tableMap[doc.id] = doc.data();
+            });
+        setDBTables(tableMap);
+    });
+    return () => unsubscribe();        
+    }, []);
+
+
 
   return (
     <>
@@ -188,14 +256,14 @@ function TableReservation() {
                         <p>ห้องอาหารครู</p>
                     </div>
                     <div className='table-row-wrapper'>
-                        <TableReservationRow6 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
-                        <TableReservationRow5 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
+                        <TableReservationRow6 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables}/>
+                        <TableReservationRow5 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
                         <div className='tableDivider'></div>
-                        <TableReservationRow4 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
-                        <TableReservationRow3 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
+                        <TableReservationRow4 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
+                        <TableReservationRow3 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
                         <div className='tableDivider'></div>
-                        <TableReservationRow2 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
-                        <TableReservationRow1 selectedTable={selectedTable} onSelectTable={setSelectedTable} />
+                        <TableReservationRow2 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
+                        <TableReservationRow1 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
 
                         <div className='restaurantBox' style={{width: '100%'}}>
                             <p>ร้านอาหาร</p>
@@ -221,20 +289,30 @@ function TableReservation() {
                         </h2>
                     </div>
                     <div className="tableReservationButtons">
-                    <div className="tableReserveForm">
-                            <button                         
-                                onClick={handleReservation}
-                                disabled={!selectedTable}
-                            >
-                                จองโต๊ะ
-                            </button>
+                        <div className="tableReserveForm">
+                                <button                         
+                                    onClick={handleReservation}
+                                    disabled={!selectedTable || !!pendingTable}
+                                >
+                                    จองโต๊ะ
+                                </button>
                         </div>
 
                         <div className="tableReserveForm">
                             <button                         
                                 onClick={handleConfirm}
+                                disabled={!pendingTable}
                             >
                                 ยืนยันการจอง
+                            </button>
+                        </div>
+
+                        <div className="tableReserveForm">
+                            <button                         
+                                    onClick={handleCancel}
+                                    disabled={!pendingTable}
+                            >
+                                ยกเลิกการจอง
                             </button>
                         </div>
                     </div>
