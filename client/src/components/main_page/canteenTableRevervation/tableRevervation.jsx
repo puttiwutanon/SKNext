@@ -18,6 +18,7 @@ function TableReservation() {
     const [cameraError, setCameraError] = useState(null);
     const [scannedData, setScannedData] = useState(null);
     const [dbTables, setDBTables] = useState([]);
+    const [, setTick] = useState(0);
  
     const timerRef = useRef(null);
     const videoRef = useRef(null);
@@ -25,6 +26,7 @@ function TableReservation() {
     const streamRef = useRef(null);
     const animFrameRef = useRef(null);
     const jsQRRef = useRef(null);
+    const pendingTableRef = useRef(null);
  
     // ── Load jsQR dynamically ──────────────────────────────────────
     useEffect(() => {
@@ -38,8 +40,7 @@ function TableReservation() {
         document.head.appendChild(script);
     }, []);
  
-    // ── Countdown logic ────────────────────────────────────────────
-    const startCountdown = () => {
+    const startConfirmationCountdown = () => {
         clearInterval(timerRef.current);
         setTimeLeft(600);
         timerRef.current = setInterval(() => {
@@ -98,6 +99,10 @@ function TableReservation() {
         }
         animFrameRef.current = requestAnimationFrame(scanFrame);
     }, []);
+
+    useEffect(() => {
+        pendingTableRef.current = pendingTable;
+    }, [pendingTable]);
  
     const stopCamera = useCallback(() => {
         cancelAnimationFrame(animFrameRef.current);
@@ -137,6 +142,17 @@ function TableReservation() {
         if (!selectedTable || !auth.currentUser) return;
 
         const tableRef = doc(db, 'tables', selectedTable);
+
+        //เช็คว่านร.มีการจองโต๊ะยัง
+        const alreadyReserved = Object.values(dbTables).some(
+            table => table.reservedBy === auth.currentUser.uid && 
+                    (table.status === 'pending' || table.status === 'occupied')
+        );
+
+        if (alreadyReserved) {
+            alert('คุณมีการจองโต๊ะอยู่แล้ว กรุณายกเลิกก่อนจองใหม่');
+            return;
+        }
         
         try {
             await updateDoc(tableRef, {
@@ -146,7 +162,7 @@ function TableReservation() {
             });
             
             setPendingTable(selectedTable);   
-            startCountdown();
+            startConfirmationCountdown();
         } catch (error) {
             console.error("Error reserving table: ", error);
         }
@@ -155,25 +171,27 @@ function TableReservation() {
     const handleConfirm = () => {
         if (!selectedTable) return;
         setShowQRPopup(true);
-        startCountdown();
+        startConfirmationCountdown();
     };
 
     const handleCancel = async () => {
-        // 1. We only care about canceling the table that is currently pending
-        if (!pendingTable) return;
+        console.log("handleCancel fired", { pendingTable, selectedTable, tableToCancel: pendingTable || selectedTable });
+        const tableToCancel = pendingTable || selectedTable;
+        if (!tableToCancel) return;
 
-        console.log("Canceling reservation for:", pendingTable);
-        const tableRef = doc(db, 'tables', pendingTable);
+        const tableData = dbTables[tableToCancel];
+        if (!tableData || (tableData.status !== 'pending' && tableData.status !== 'occupied')) return;
+
+        const tableRef = doc(db, 'tables', tableToCancel);
 
         try {
-            // 2. Tell Firebase to change the status back to 'available'
             await updateDoc(tableRef, {
                 status: 'available',
                 reservedBy: null,
-                timerStartsAt: null
+                timerStartsAt: null,
+                occupiedUntil: null,
             });
 
-            // 3. Clear all the timers and states on the screen
             setPendingTable(null);
             setSelectedTable(null);
             setTimeLeft(null);
@@ -184,20 +202,22 @@ function TableReservation() {
             console.error("Error canceling table: ", error);
         }
     };
+
+
  
     const handleQRSuccess = async (data) => {
-        // 1. Extract the table code from the scanned URL
         // Your URL: http://192.168.1.111:5173/tableRevervation?table=1A
         const url = new URL(data);
         const scannedTableCode = url.searchParams.get('table');
+        const pendingTable = pendingTableRef.current;
 
-        // 2. Validate: Is this the table they actually reserved?
         if (scannedTableCode === pendingTable) {
             const tableRef = doc(db, 'tables', pendingTable);
+            const occupiedUntil = new Date(Date.now() + 30 * 60 * 1000);
             
             await updateDoc(tableRef, {
                 status: 'occupied',
-                // The table is now officially taken!
+                occupiedUntil: occupiedUntil,
             });
 
             stopCamera();
@@ -208,28 +228,83 @@ function TableReservation() {
             
             setTimeout(() => {
                 setShowQRPopup(false);
-                setSelectedTable(null);
             }, 1500);
         } else {
             alert(`ผิดโต๊ะ! คุณจองโต๊ะ ${pendingTable} แต่สแกนโต๊ะ ${scannedTableCode}`);
-            // Keep camera running so they can try again
         }
     };
+
  
     const handleClosePopup = () => {
         setShowQRPopup(false);
     };
 
+    const handleSelectTable = (code) => {
+        // If user has an occupied table, don't allow selecting another
+        const myOccupiedTable = Object.entries(dbTables).find(
+            ([id, data]) => data.reservedBy === auth.currentUser?.uid && (data.status === 'occupied' || data.status === 'pending')
+        );
+        
+        if (myOccupiedTable) {
+            const statusText = myOccupiedTable[1].status === 'occupied' ? 'กำลังใช้งานอยู่' : 'รอการยืนยันอยู่';
+            alert(`คุณมีโต๊ะ ${myOccupiedTable[0]} ที่${statusText} กรุณายกเลิกก่อน`);
+            return;
+        }
+        
+        setSelectedTable(code);
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => setTick(t => t + 1), 1000);
+        return () => clearInterval(interval);
+    }, []);
+
     useEffect(()=>{
     const unsubscribe = onSnapshot(collection(db, 'tables'), (snapshot) => {
             const tableMap = {};
             snapshot.docs.forEach(doc => {
+                const data = doc.data();
                 tableMap[doc.id] = doc.data();
+
+                if(data.status === 'occupied' && data.occupiedUntil) {
+                    const expiry = data.occupiedUntil.toDate();
+                    if(expiry < new Date()){
+                        updateDoc(doc.ref, {
+                            status: 'available',
+                            reservedBy: null,
+                            timerStartsAt: null,
+                            occupiedUntil: null,
+                        });
+                    }
+                }
             });
         setDBTables(tableMap);
     });
     return () => unsubscribe();        
     }, []);
+
+    useEffect(() => {
+        if (!auth.currentUser || Object.keys(dbTables).length === 0) return;
+        
+        const myOccupied = Object.entries(dbTables).find(
+            ([id, data]) => data.reservedBy === auth.currentUser.uid && 
+                            (data.status === 'occupied' || data.status === 'pending')
+        );
+        
+        if (myOccupied && !selectedTable) {
+            setSelectedTable(myOccupied[0]);
+            if (myOccupied[1].status === 'pending') {
+                setPendingTable(myOccupied[0]);
+                // restore countdown from timerStartsAt
+                const elapsed = Math.floor((Date.now() - myOccupied[1].timerStartsAt.toDate()) / 1000);
+                const remaining = 600 - elapsed;
+                if (remaining > 0) {
+                    setTimeLeft(remaining);
+                    startConfirmationCountdown();
+                }
+            }
+        }
+    }, [dbTables]);
 
 
 
@@ -248,7 +323,7 @@ function TableReservation() {
                     marginLeft: '1rem',
                     marginBottom: '1rem',
                     display: 'flex',
-                    alignItems: 'flex-start', // Change from center to flex-start
+                    alignItems: 'flex-start', 
                     gap: '0.5rem',
                     width: '100%'
                 }}>
@@ -256,14 +331,14 @@ function TableReservation() {
                         <p>ห้องอาหารครู</p>
                     </div>
                     <div className='table-row-wrapper'>
-                        <TableReservationRow6 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables}/>
-                        <TableReservationRow5 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
+                        <TableReservationRow6 selectedTable={selectedTable} onSelectTable={handleSelectTable} dbTables={dbTables}/>
+                        <TableReservationRow5 selectedTable={selectedTable} onSelectTable={handleSelectTable} dbTables={dbTables} />
                         <div className='tableDivider'></div>
-                        <TableReservationRow4 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
-                        <TableReservationRow3 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
+                        <TableReservationRow4 selectedTable={selectedTable} onSelectTable={handleSelectTable} dbTables={dbTables} />
+                        <TableReservationRow3 selectedTable={selectedTable} onSelectTable={handleSelectTable} dbTables={dbTables} />
                         <div className='tableDivider'></div>
-                        <TableReservationRow2 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
-                        <TableReservationRow1 selectedTable={selectedTable} onSelectTable={setSelectedTable} dbTables={dbTables} />
+                        <TableReservationRow2 selectedTable={selectedTable} onSelectTable={handleSelectTable} dbTables={dbTables} />
+                        <TableReservationRow1 selectedTable={selectedTable} onSelectTable={handleSelectTable} dbTables={dbTables} />
 
                         <div className='restaurantBox' style={{width: '100%'}}>
                             <p>ร้านอาหาร</p>
@@ -287,6 +362,16 @@ function TableReservation() {
                         <h2 style={{ display: pendingTable && timeLeft !== null ? 'block' : 'none' }}>
                             โต๊ะ {pendingTable} — กรุณายืนยันภายใน: {formatTime(timeLeft)}
                         </h2>
+
+                        {(() => {
+                            const tableData = dbTables[selectedTable];
+                            if (!tableData || tableData.status !== 'occupied') return null;
+                            const occupiedUntil = tableData.occupiedUntil?.toDate?.();
+                            if (!occupiedUntil) return null;
+                            const secondsLeft = Math.max(0, Math.floor((occupiedUntil - Date.now()) / 1000));
+                            return <h2>โต๊ะ {selectedTable} — สามารถใช้งานได้อีก: {formatTime(secondsLeft)}</h2>;
+                        })()}
+
                     </div>
                     <div className="tableReservationButtons">
                         <div className="tableReserveForm">
@@ -310,7 +395,7 @@ function TableReservation() {
                         <div className="tableReserveForm">
                             <button                         
                                     onClick={handleCancel}
-                                    disabled={!pendingTable}
+                                    disabled={!pendingTable && dbTables[selectedTable]?.status !== 'occupied'}
                             >
                                 ยกเลิกการจอง
                             </button>
@@ -346,7 +431,7 @@ function TableReservation() {
                             {scannedData ? (
                                 <div className="qr-success-state">
                                     <span className="qr-success-icon">✓</span>
-                                    <p>สแกนสำเร็จ!</p>
+                                    <p>สแกนสำเร็จ</p>
                                 </div>
                             ) : cameraError ? (
                                 <p className="qr-error">{cameraError}</p>
