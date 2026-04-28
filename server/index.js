@@ -25,23 +25,43 @@ webpush.setVapidDetails(
 );
 
 const sendNotification = async (userId, tableId) => {
-    const userDoc = await db.collection('users').doc(userId).get();
-    const userData = userDoc.data();
-    if (!userData) return;
+    try {
+        const userDoc = await db.collection('users').doc(userId).get();
+        const userData = userDoc.data();
+        
+        if (!userData) {
+            console.log('No user data found for:', userId);
+            return;
+        }
 
-    // Web Push (works when tab closed if PWA installed)
-    if (userData.fcmToken) {
-        await admin.messaging().send({
-            token: userData.fcmToken,
+        const tokens = userData.fcmTokens || [];
+        console.log('Tokens found:', tokens.length);
+        
+        if (tokens.length === 0) {
+            console.log('No FCM tokens for user:', userId);
+            return;
+        }
+
+        const response = await admin.messaging().sendEachForMulticast({
+            tokens: tokens,
             notification: {
                 title: 'หมดเวลาใช้โต๊ะอาหาร',
                 body: `โต๊ะ ${tableId} ของคุณหมดเวลาแล้ว กรุณาเก็บของและออกจากโต๊ะ`
             },
             android: { priority: 'high' },
         });
+
+        // Log results for each token
+        console.log('Sent:', response.successCount, 'Success,', response.failureCount, 'Failed');
+        response.responses.forEach((resp, i) => {
+            if (!resp.success) {
+                console.log(`Token ${i} failed:`, resp.error?.code, resp.error?.message);
+            }
+        });
+
+    } catch (err) {
+        console.error('sendNotification error:', err.message);
     }
-
-
 };
 
 // ── Check expired tables every minute ─────────────────────────

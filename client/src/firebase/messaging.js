@@ -1,10 +1,10 @@
-import { getMessaging, getToken } from 'firebase/messaging';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db, auth } from './firebaseConfig';
 
 export const requestNotificationPermission = async (userId) => {
     try {
         if (!('serviceWorker' in navigator)) {
+            const { getMessaging, getToken } = await import('firebase/messaging');
             console.error('Service workers not supported');
             return;
         }
@@ -21,11 +21,20 @@ export const requestNotificationPermission = async (userId) => {
             vapidKey: import.meta.env.VITE_VAPID_PUBLIC_KEY
         });
 
+        // Get existing tokens array
+        const userDoc = await getDoc(doc(db, 'users', userId));
+        const existingTokens = userDoc.data()?.fcmTokens || [];
+
+        // Add new token only if not already in array
+        if (!existingTokens.includes(token)) {
+            existingTokens.push(token);
+        }
+
         // Creates the document if it doesn't exist, updates if it does
         await setDoc(doc(db, 'users', userId), {
             uid: userId,
             email: auth.currentUser?.email,
-            fcmToken: token,
+            fcmTokens: existingTokens,
             role: 'student',
             createdAt: new Date(),
         }, { merge: true });
