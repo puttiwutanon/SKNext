@@ -1,12 +1,14 @@
 import {useState} from 'react'
 import { Link, useNavigate  } from 'react-router-dom'
 import { doSignInWithEmailAndPassword } from '../../../firebase/auth'
+import { requestNotificationPermission } from '../../../firebase/messaging';
+
 
 function LoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState('')
-    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -15,6 +17,7 @@ function LoginForm() {
     setLoading(true);
     try {
         const userCredential = await doSignInWithEmailAndPassword(email, password);
+        await requestNotificationPermission(userCredential.user.uid);
         console.log('Logged in user:', userCredential.user);
         navigate('/sknext');
     } catch (err) {
