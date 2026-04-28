@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react()],
     server: {
     host: true,
-    https: false, // ← we'll use a different approach
-    allowedHosts: 'all'
+    allowedHosts:  ['pamphlet-manmade-abridge.ngrok-free.dev', 'all'],
   }
 })
