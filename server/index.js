@@ -49,6 +49,17 @@ const sendNotification = async (userId, tableId) => {
                 body: `โต๊ะ ${tableId} ของคุณหมดเวลาแล้ว กรุณาเก็บของและออกจากโต๊ะ`
             },
             android: { priority: 'high' },
+            webpush: {
+                headers: { Urgency: 'high' },
+                notification: {
+                    title: 'หมดเวลาใช้โต๊ะอาหาร',
+                    body: `โต๊ะ ${tableId} ของคุณหมดเวลาแล้ว กรุณาเก็บของและออกจากโต๊ะ`,
+                    icon: '/icon.png',
+                    requireInteraction: true,
+                    vibrate: [200, 100, 200],
+                },
+                fcmOptions: {}
+            },
         });
 
         // Log results for each token
