@@ -1,515 +1,62 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-* {
-  padding: 0%;
-  margin: 0%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  font-family: "kanit";
-  text-decoration: none;
-}
-
-.sidebar {
-  height: 100vh;
-  width: 100px;
-  overflow: hidden;
-  background-color: #F1F5FB;
-  color: #504f4f;
-  position: fixed;
-}
-
-.sidebarItems {
+.authform {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #333;
-  margin-top: 1rem;
-}
-.sidebarItems div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  margin: 0.3rem;
-  border-radius: 16px;
-  color: #333;
+  border: 1px solid #808080;
   width: -moz-fit-content;
   width: fit-content;
-}
-.sidebarItems div:hover {
-  cursor: pointer;
-  background-color: #347CFF;
-  color: #F1F5FB;
-}
-.sidebarItems div:hover p, .sidebarItems div:hover i {
-  color: #F1F5FB;
-}
-.sidebarItems div p {
-  font-size: 0.875rem;
-  color: #333;
-}
-.sidebarItems div i {
-  color: #333;
-}
-.sidebarItems div a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-}
-.sidebarItems div button {
-  background-color: transparent;
-  border: none;
-  color: #333;
-  font-size: 1.5rem;
-}
-.sidebarItems div button:hover {
-  cursor: pointer;
-}
-
-.SKNextHeader {
-  padding-left: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.SKNextHeader h1 {
-  color: #334155;
-  font-weight: 600;
-  font-family: "Kanit";
-}
-.SKNextHeader a {
-  color: #333;
-  margin: 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.SKNextPageContainer {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.PageItems {
-  display: flex;
-  flex-direction: column;
-  margin-left: 100px;
-}
-
-.schedule-container {
-  font-family: "Inter", sans-serif;
+  border-radius: 14px;
   padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  background-color: rgba(255, 255, 255, 0.8666666667);
 }
-.schedule-container h2 {
-  color: #334155;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
-.schedule-grid {
-  display: grid;
-  grid-template-columns: 140px repeat(10, minmax(100px, 1fr));
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-.schedule-grid .time-header {
-  background: #f0f2f5;
-  padding: 4px 8px;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 600;
-  color: #334155;
-}
-.schedule-grid .time-header span {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: #64748b;
-  margin-top: 4px;
-}
-.schedule-grid .day-label {
-  background: #dcf0ff;
-  padding: 6px;
-  height: -moz-min-content;
-  height: min-content;
-  border-radius: 12px;
+.authform .authform-email {
+  border-bottom: 1px solid #808080;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  font-weight: 600;
-  color: rgb(0, 96.5714285714, 169);
 }
-.schedule-grid .day-label span {
-  font-size: 0.8rem;
-  font-weight: 400;
-  margin-top: 0.5px;
-}
-.schedule-grid .slot {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  height: 55px;
-  transition: all 0.2s ease-in-out;
-}
-.schedule-grid .slot:hover {
-  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
-  background-color: #fcfcfc;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.schedule-grid .slot.has-class {
-  background: #fff;
-  border-left: 4px solid #3b82f6;
-  padding: 8px;
-  font-size: 0.85rem;
-}
-
-.schedule-grid::-webkit-scrollbar {
-  height: 6px;
-}
-
-.schedule-grid::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
-}
-
-.subjects {
-  padding-left: 2rem;
-}
-.subjects h2 {
-  color: #334155;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  font-family: "Kanit";
-}
-
-.activities {
-  padding-left: 2rem;
-}
-.activities h2 {
-  color: #334155;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  font-family: "Kanit";
-}
-.activities .activitiesContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-.activities .activityItem {
-  background-color: #dcf0ff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: all 0.2s ease-in-out;
+.authform .text-input {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
-.activities .activityItem:hover {
-  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
-  background-color: #ffdce5;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.authform input {
+  margin: 1rem;
+  padding: 10px;
 }
-.activities .activityItem h3 {
-  color: rgb(0, 96.5714285714, 169);
-  margin-bottom: 1rem;
-  font-weight: 500;
-  font-family: "Kanit";
-  line-height: 1.4;
+.authform button {
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 14px;
+  border: none;
+  width: 9rem;
+  align-items: center !important;
+  justify-content: center !important;
 }
-.activities .activityItem a {
-  color: #3b82f6;
+.authform button:hover {
+  background-color: #C8E6C9;
+  color: #fff;
+}
+.authform a {
+  color: #000;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
 }
-.activities .activityItem a:hover {
+.authform a:hover {
   text-decoration: underline;
+  color: #b3e3b4;
 }
 
-.profileSidebar {
-  height: 100vh;
-  width: 220px;
-  overflow: hidden;
-  color: #504f4f;
-  position: fixed;
-  border-right: 1px solid #e2e8f0;
-}
-.profileSidebar div {
+.loginPage {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 16px;
-  color: #333;
-  margin-left: 2rem;
-}
-.profileSidebar div:hover {
-  cursor: pointer;
-  background-color: #dcf0ff;
-}
-.profileSidebar div:hover p, .profileSidebar div:hover i {
-  color: rgb(0, 96.5714285714, 169);
-}
-.profileSidebar div p {
-  font-size: 1rem;
-  color: #333;
-}
-.profileSidebar div i {
-  color: #333;
-}
-.profileSidebar div a {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 180px;
-  padding: 0.5rem;
-}
-
-.profileInfo {
-  margin-left: 15rem;
-}
-
-.contactInfo .contactInfoItems button, .contactInfo .aboutYouItems button, .aboutYou .contactInfoItems button, .aboutYou .aboutYouItems button {
-  background-color: transparent;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1rem;
-  color: #333;
-  font-size: 0.9rem;
-  transition: all 0.2s ease-in-out;
-}
-.contactInfo .contactInfoItems button:hover, .contactInfo .aboutYouItems button:hover, .aboutYou .contactInfoItems button:hover, .aboutYou .aboutYouItems button:hover {
-  background-color: #dcf0ff;
-  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.contactInfo .contactInfoItems p, .contactInfo .aboutYouItems p, .aboutYou .contactInfoItems p, .aboutYou .aboutYouItems p {
-  margin-top: 0.5rem;
-  color: #64748b;
-}
-
-.aboutYouHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-.aboutYouHeader h2, .aboutYouHeader h4 {
-  color: #334155;
-  font-weight: 600;
-  font-family: "Kanit";
-  margin-left: 2rem;
-}
-
-.aboutYouformItem {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 1rem;
-  border-bottom: #e2e8f0 1px solid;
-  padding: 1.5rem 1rem;
-}
-.aboutYouformItem label, .aboutYouformItem select, .aboutYouformItem option {
-  color: #334155;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-.aboutYouformItem input, .aboutYouformItem textarea, .aboutYouformItem select, .aboutYouformItem option {
-  padding: 0.75rem;
-  margin: 10px;
-  width: 12.5rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease-in-out;
-}
-.aboutYouformItem input:focus, .aboutYouformItem textarea:focus, .aboutYouformItem select:focus, .aboutYouformItem option:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-}
-.aboutYouformItem div {
-  display: flex;
-  flex-direction: column;
-}
-
-.CheerPracticeCheckContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
   width: 100%;
   height: 100vh;
-}
-
-.CheerPracticeCheck {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  border: #e2e8f0 1px solid;
-  border-radius: 12px;
-  width: 80%;
-}
-.CheerPracticeCheck h2 {
-  color: #334155;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  font-family: "Kanit";
-}
-.CheerPracticeCheck .CheerPracticeCheckHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-.CheerPracticeCheck .CheerPracticeCheckHeader button {
-  background-color: transparent;
-  border: 1px solid #e2e8f0;
-  padding: 1rem;
-  color: #333;
-  font-size: 0.9rem;
-  width: 100%;
-  transition: all 0.2s ease-in-out;
-}
-.CheerPracticeCheck .CheerPracticeCheckHeader button:hover {
-  background-color: #dcf0ff;
-  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.CheerPracticeCheck .CheerPracticeCheckBody {
-  display: flex;
-  flex-direction: column;
-  background-color: #F1F5FB;
-  width: 100%;
-  height: 500px;
-}
-
-.searchContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 1rem;
-}
-.searchContainer .SearchStudents {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: #e2e8f0 1px solid;
-  border-radius: 12px;
-  width: 80%;
-  color: #334155;
-}
-.searchContainer .SearchStudents h2 {
-  color: #334155;
-  font-weight: 600;
-  font-family: "Kanit";
-  align-self: center;
-}
-.searchContainer .SearchStudents .searchHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.searchContainer .SearchStudents .searchHeader button {
-  background-color: transparent;
-  border: 1px solid #e2e8f0;
-  padding: 1rem;
-  color: #333;
-  font-size: 0.9rem;
-  width: 100%;
-  transition: all 0.2s ease-in-out;
-}
-.searchContainer .SearchStudents .searchHeader button:hover {
-  background-color: #dcf0ff;
-  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.searchContainer .SearchStudents .searchForm {
-  display: flex;
-  flex-direction: column;
-  background-color: #F1F5FB;
-  width: 100%;
-}
-.searchContainer .SearchStudents .searchForm p {
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  color: #64748b;
-  align-self: center;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormItem {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-top: 1rem;
-  padding: 1.5rem 1rem;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormItem label {
-  color: #334155;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormItem input, .searchContainer .SearchStudents .searchForm .SearchFormItem textarea, .searchContainer .SearchStudents .searchForm .SearchFormItem select, .searchContainer .SearchStudents .searchForm .SearchFormItem option {
-  padding: 0.75rem;
-  width: 12.5rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease-in-out;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormItem input:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem textarea:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem select:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem option:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-}
-.searchContainer .SearchStudents .searchForm .SearchFormItem div {
-  display: flex;
-  flex-direction: column;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormButton {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-  width: 100%;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormButton button {
-  background-color: transparent;
-  border: 1px solid #e2e8f0;
-  padding: 1rem;
-  color: #333;
-  font-size: 0.9rem;
-  width: 100%;
-  transition: all 0.2s ease-in-out;
-}
-.searchContainer .SearchStudents .searchForm .SearchFormButton button:hover {
-  background-color: #dcf0ff;
-  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .table-reservation-wrapper {
@@ -553,6 +100,7 @@
   border-radius: 8px;
   height: 35px;
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
 }
 .table-grid .table-slot.available button {
   background-color: #2ecc71;
@@ -871,63 +419,429 @@
   padding: 1rem;
 }
 
-.authform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #808080;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 14px;
-  padding: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  background-color: rgba(255, 255, 255, 0.8666666667);
-}
-.authform .authform-email {
-  border-bottom: 1px solid #808080;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.authform .text-input {
-  display: flex;
-  flex-direction: column;
-}
-.authform input {
-  margin: 1rem;
-  padding: 10px;
-}
-.authform button {
-  padding: 0.5rem;
-  margin: 1rem;
-  border-radius: 14px;
-  border: none;
-  width: 9rem;
-  align-items: center !important;
-  justify-content: center !important;
-}
-.authform button:hover {
-  background-color: #C8E6C9;
-  color: #fff;
-}
-.authform a {
-  color: #000;
-  text-decoration: none;
-}
-.authform a:hover {
-  text-decoration: underline;
-  color: #b3e3b4;
+.sidebar {
+  height: 100vh;
+  width: 100px;
+  overflow: hidden;
+  background-color: #F1F5FB;
+  color: #504f4f;
+  position: fixed;
 }
 
-.loginPage {
+.sidebarItems {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  align-self: center;
+  color: #333;
+  margin-top: 1rem;
+}
+.sidebarItems div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0.3rem;
+  border-radius: 16px;
+  color: #333;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.sidebarItems div:hover {
+  cursor: pointer;
+  background-color: #347CFF;
+  color: #F1F5FB;
+}
+.sidebarItems div:hover p, .sidebarItems div:hover i {
+  color: #F1F5FB;
+}
+.sidebarItems div p {
+  font-size: 0.875rem;
+  color: #333;
+}
+.sidebarItems div i {
+  color: #333;
+}
+.sidebarItems div a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+}
+.sidebarItems div button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+}
+.sidebarItems div button:hover {
+  cursor: pointer;
+}
+
+.SKNextHeader {
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.SKNextHeader h1 {
+  color: #334155;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+.SKNextHeader a {
+  color: #333;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.SKNextPageContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.PageItems {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+}
+
+.schedule-container {
+  font-family: "Inter", sans-serif;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.schedule-container h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.profileSidebar {
+  height: 100vh;
+  width: 220px;
+  overflow: hidden;
+  color: #504f4f;
+  position: fixed;
+  border-right: 1px solid #e2e8f0;
+}
+.profileSidebar div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 16px;
+  color: #333;
+  margin-left: 2rem;
+}
+.profileSidebar div:hover {
+  cursor: pointer;
+  background-color: #dcf0ff;
+}
+.profileSidebar div:hover p, .profileSidebar div:hover i {
+  color: rgb(0, 96.5714285714, 169);
+}
+.profileSidebar div p {
+  font-size: 1rem;
+  color: #333;
+}
+.profileSidebar div i {
+  color: #333;
+}
+.profileSidebar div a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 180px;
+  padding: 0.5rem;
+}
+
+.profileInfo {
+  margin-left: 15rem;
+}
+
+.contactInfo .contactInfoItems button, .contactInfo .aboutYouItems button, .aboutYou .contactInfoItems button, .aboutYou .aboutYouItems button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+.contactInfo .contactInfoItems button:hover, .contactInfo .aboutYouItems button:hover, .aboutYou .contactInfoItems button:hover, .aboutYou .aboutYouItems button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.contactInfo .contactInfoItems p, .contactInfo .aboutYouItems p, .aboutYou .contactInfoItems p, .aboutYou .aboutYouItems p {
+  margin-top: 0.5rem;
+  color: #64748b;
+}
+
+.aboutYouHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.aboutYouHeader h2, .aboutYouHeader h4 {
+  color: #334155;
+  font-weight: 600;
+  font-family: "Kanit";
+  margin-left: 2rem;
+}
+
+.aboutYouformItem {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  border-bottom: #e2e8f0 1px solid;
+  padding: 1.5rem 1rem;
+}
+.aboutYouformItem label, .aboutYouformItem select, .aboutYouformItem option {
+  color: #334155;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.aboutYouformItem input, .aboutYouformItem textarea, .aboutYouformItem select, .aboutYouformItem option {
+  padding: 0.75rem;
+  margin: 10px;
+  width: 12.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+.aboutYouformItem input:focus, .aboutYouformItem textarea:focus, .aboutYouformItem select:focus, .aboutYouformItem option:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+.aboutYouformItem div {
+  display: flex;
+  flex-direction: column;
+}
+
+.CheerPracticeCheckContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100vh;
+}
+
+.CheerPracticeCheck {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: #e2e8f0 1px solid;
+  border-radius: 12px;
+  width: 80%;
+}
+.CheerPracticeCheck h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+.CheerPracticeCheck .CheerPracticeCheckHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.CheerPracticeCheck .CheerPracticeCheckHeader button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.CheerPracticeCheck .CheerPracticeCheckHeader button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.CheerPracticeCheck .CheerPracticeCheckBody {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F5FB;
+  width: 100%;
+  height: 500px;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+.searchContainer .SearchStudents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: #e2e8f0 1px solid;
+  border-radius: 12px;
+  width: 80%;
+  color: #334155;
+}
+.searchContainer .SearchStudents h2 {
+  color: #334155;
+  font-weight: 600;
+  font-family: "Kanit";
+  align-self: center;
+}
+.searchContainer .SearchStudents .searchHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.searchContainer .SearchStudents .searchHeader button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.searchContainer .SearchStudents .searchHeader button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.searchContainer .SearchStudents .searchForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F5FB;
+  width: 100%;
+}
+.searchContainer .SearchStudents .searchForm p {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  color: #64748b;
+  align-self: center;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 1.5rem 1rem;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem label {
+  color: #334155;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem input, .searchContainer .SearchStudents .searchForm .SearchFormItem textarea, .searchContainer .SearchStudents .searchForm .SearchFormItem select, .searchContainer .SearchStudents .searchForm .SearchFormItem option {
+  padding: 0.75rem;
+  width: 12.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem input:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem textarea:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem select:focus, .searchContainer .SearchStudents .searchForm .SearchFormItem option:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+.searchContainer .SearchStudents .searchForm .SearchFormItem div {
+  display: flex;
+  flex-direction: column;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormButton button {
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+.searchContainer .SearchStudents .searchForm .SearchFormButton button:hover {
+  background-color: #dcf0ff;
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.activities {
+  padding-left: 2rem;
+}
+.activities h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
+}
+.activities .activitiesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.activities .activityItem {
+  background-color: #dcf0ff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.activities .activityItem:hover {
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  background-color: #ffdce5;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.activities .activityItem h3 {
+  color: rgb(0, 96.5714285714, 169);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-family: "Kanit";
+  line-height: 1.4;
+}
+.activities .activityItem a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.activities .activityItem a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 1024px) {
@@ -1198,4 +1112,90 @@
     align-items: center;
     justify-content: center;
   }
+}
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "kanit";
+  text-decoration: none;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 140px repeat(10, minmax(100px, 1fr));
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.schedule-grid .time-header {
+  background: #f0f2f5;
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #334155;
+}
+.schedule-grid .time-header span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #64748b;
+  margin-top: 4px;
+}
+.schedule-grid .day-label {
+  background: #dcf0ff;
+  padding: 6px;
+  height: -moz-min-content;
+  height: min-content;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 600;
+  color: rgb(0, 96.5714285714, 169);
+}
+.schedule-grid .day-label span {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 0.5px;
+}
+.schedule-grid .slot {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  height: 55px;
+  transition: all 0.2s ease-in-out;
+}
+.schedule-grid .slot:hover {
+  border-color: rgb(158.7727272727, 178.6818181818, 205.2272727273);
+  background-color: #fcfcfc;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.schedule-grid .slot.has-class {
+  background: #fff;
+  border-left: 4px solid #3b82f6;
+  padding: 8px;
+  font-size: 0.85rem;
+}
+
+.schedule-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.schedule-grid::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.subjects {
+  padding-left: 2rem;
+}
+.subjects h2 {
+  color: #334155;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: "Kanit";
 }/*# sourceMappingURL=styles.css.map */

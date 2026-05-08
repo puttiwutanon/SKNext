@@ -1,0 +1,55 @@
+.activities {
+    padding-left: 2rem;
+
+    h2 {
+        color: $text-main;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: 'Kanit';
+    }
+
+    .activitiesContainer {
+        display: grid;
+        // This creates exactly 3 columns of equal width
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 1.5rem; // Increased gap for a cleaner look
+    }
+
+    .activityItem {
+        background-color: $bg-light-blue;
+        border-radius: $radius;
+        padding: 1.5rem; // Slightly more padding
+        transition: all 0.2s ease-in-out;
+        
+        // Remove 'width: 30%' and 'margin-bottom' as Grid handles this now
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &:hover {
+            border-color: darken($border-color, 20%);
+            background-color: $bg-pink;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h3 {
+            color: darken($bg-light-blue, 60%);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-family: 'Kanit';
+            line-height: 1.4;
+        }
+
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

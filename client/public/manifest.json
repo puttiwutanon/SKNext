@@ -1,0 +1,20 @@
+{
+  "name": "SKNext",
+  "short_name": "SKNext",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/ตราเสมา.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ตราเสมา.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

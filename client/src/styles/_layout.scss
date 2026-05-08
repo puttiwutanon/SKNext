@@ -1,0 +1,102 @@
+.sidebar{
+    height: 100vh;
+    width: 100px;
+    overflow: hidden;
+    background-color: #F1F5FB;
+    color: #504f4f;
+    position: fixed;
+}
+
+.sidebarItems{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    margin-top: 1rem;
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        margin: 0.3rem;
+        border-radius: 16px;
+        color: #333;
+        width: fit-content;
+        &:hover{
+            cursor: pointer;
+            background-color: #347CFF;
+            color: #F1F5FB;
+            p, i{
+                color: #F1F5FB;
+            }
+        }
+        p{
+            font-size: 0.875rem;
+            color: #333;
+        }
+        i{
+            color: #333;
+        }
+        a{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            width: 80px; 
+        }
+        button{
+            background-color: transparent;
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.SKNextHeader{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h1{
+        color: $text-main;
+        font-weight: 600;
+        font-family: 'Kanit';
+    }
+    a{
+        color: #333;
+        margin: 1rem;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.SKNextPageContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.PageItems{
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+.schedule-container {
+  font-family: 'Inter', sans-serif; // Or your preferred Thai font
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h2 {
+    color: $text-main;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+}

@@ -44,25 +44,16 @@ const sendNotification = async (userId, tableId) => {
 
         const response = await admin.messaging().sendEachForMulticast({
             tokens: tokens,
-            notification: {
+            data: {
                 title: 'หมดเวลาใช้โต๊ะอาหาร',
-                body: `โต๊ะ ${tableId} ของคุณหมดเวลาแล้ว กรุณาเก็บของและออกจากโต๊ะ`
+                body: `โต๊ะ ${tableId} ของคุณหมดเวลาแล้ว กรุณาเก็บของและออกจากโต๊ะ`,
             },
             android: { priority: 'high' },
             webpush: {
                 headers: { Urgency: 'high' },
-                notification: {
-                    title: 'หมดเวลาใช้โต๊ะอาหาร',
-                    body: `โต๊ะ ${tableId} ของคุณหมดเวลาแล้ว กรุณาเก็บของและออกจากโต๊ะ`,
-                    icon: '/icon.png',
-                    requireInteraction: true,
-                    vibrate: [200, 100, 200],
-                },
-                fcmOptions: {}
             },
         });
 
-        // Log results for each token
         console.log('Sent:', response.successCount, 'Success,', response.failureCount, 'Failed');
         response.responses.forEach((resp, i) => {
             if (!resp.success) {

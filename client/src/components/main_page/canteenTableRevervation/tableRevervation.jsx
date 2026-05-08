@@ -136,9 +136,22 @@ function TableReservation() {
         const s = String(seconds % 60).padStart(2, '0');
         return `${m}:${s}`;
     };
+
+    const isWithinLunchHours = () => {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const totalMinutes = hours * 60 + minutes;
+        // 11:00 = 660 mins, 12:40 = 760 mins
+        return totalMinutes >= 660 && totalMinutes <= 760;
+    };
  
     // ── Handlers ───────────────────────────────────────────────────
     const handleReservation = async () => {
+        if (!isWithinLunchHours()) {
+            alert('ไม่สามารถจองโต๊ะได้ในขณะนี้ กรุณาจองในช่วงเวลา 11:00 - 12:40 น. เท่านั้น');
+            return;
+        }
         if (!selectedTable || !auth.currentUser) return;
 
         const tableRef = doc(db, 'tables', selectedTable);
@@ -240,6 +253,10 @@ function TableReservation() {
     };
 
     const handleSelectTable = (code) => {
+        if (!isWithinLunchHours()) {
+            alert('ไม่สามารถจองโต๊ะได้ในขณะนี้ กรุณาจองในช่วงเวลา 11:00 - 12:40 น. เท่านั้น');
+            return;
+        }
         // If user has an occupied table, don't allow selecting another
         const myOccupiedTable = Object.entries(dbTables).find(
             ([id, data]) => data.reservedBy === auth.currentUser?.uid && (data.status === 'occupied' || data.status === 'pending')

@@ -70,13 +70,15 @@ export const setupForegroundNotifications = async () => {
 
         onMessage(messaging, (payload) => {
             console.log('Foreground message received:', payload);
+
+            if (document.visibilityState !== 'visible') return;
             if (Notification.permission !== 'granted') return;
 
             navigator.serviceWorker.ready.then((registration) => {
                 registration.showNotification(
-                    payload.notification?.title || 'New Notification',
+                    payload.data?.title || 'New Notification',
                     {
-                        body: payload.notification?.body,
+                        body: payload.data?.body,
                         icon: '/icon.png',
                         vibrate: [200, 100, 200],
                         requireInteraction: true,
