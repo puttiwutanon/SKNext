@@ -18,6 +18,7 @@ import SearchTeachers from './components/main_page/searchPage/searchTeachers';
 import SearchDocuments from './components/main_page/searchPage/searchDocuments';
 import LoginPage from './components/auth/login/loginPage';
 import ProtectedRoute from './components/auth/protectedRoutes';
+import RoomReservation from './components/main_page/roomReservation/roomReservation';
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
   {
     path: "/tableRevervation",
     element: <TableRevervation/>,
+  },
+  {
+    path: "/roomReservation",
+    element: <RoomReservation/>,
   },
   {
     path: "/cheerPracticeCheck",
