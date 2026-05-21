@@ -79,13 +79,15 @@
 .SKNextPageContainer{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 100% ;
 }
 
-.PageItems{
-    display: flex;
-    flex-direction: column;
-    margin-left: 100px;
+.PageItems {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  width: calc(100% - 100px); // fill exactly the space after the sidebar
+  min-height: 100vh;
 }
 
 .schedule-container {

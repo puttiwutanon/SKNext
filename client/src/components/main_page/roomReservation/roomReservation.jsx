@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import Sidebar from '../sidebar/sidebar';
 import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../../firebase/firebaseConfig';
+import Rooms from './rooms';
 
-const ROOMS_COLLECTION = 'rooms';           // Firestore collection name
+const ROOMS_COLLECTION = 'InpireCommunityRooms';           // Firestore collection name
 const QR_PARAM = 'room';                    // URL param in QR codes: ?room=R1
 const OCCUPIED_DURATION_MS = 60 * 60 * 1000; // 1 hour per booking
 const COUNTDOWN_SECONDS = 600; // 10 minutes to confirm booking
@@ -269,7 +271,66 @@ function RoomReservation() {
 
   return (
     <>
+        <div className="SKNextPageContainer">
+            <Sidebar />
+            <div className="PageItems" style={{width: '100%'}}>
+                <div className="SKNextHeader">
+                    <a href="/SKNext">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <h1>การจองห้องใน Inspire Community</h1>
+                </div>
+                <Rooms/>
+            </div>
 
+                <div className="roomReservationButtonWrapper">
+                    <div>
+                        <h2>โต๊ะที่เลือก: {selectedTable ?? 'ยังไม่ได้เลือก'}</h2>
+
+                        <h2 style={{ display: pendingTable && timeLeft !== null ? 'block' : 'none' }}>
+                            โต๊ะ {pendingTable} — กรุณายืนยันภายใน: {formatTime(timeLeft)}
+                        </h2>
+
+                        {(() => {
+                            const tableData = dbTables[selectedTable];
+                            if (!tableData || tableData.status !== 'occupied') return null;
+                            const occupiedUntil = tableData.occupiedUntil?.toDate?.();
+                            if (!occupiedUntil) return null;
+                            const secondsLeft = Math.max(0, Math.floor((occupiedUntil - Date.now()) / 1000));
+                            return <h2>โต๊ะ {selectedTable} — สามารถใช้งานได้อีก: {formatTime(secondsLeft)}</h2>;
+                        })()}
+
+                    </div>
+                    <div className="tableReservationButtons">
+                        <div className="tableReserveForm">
+                                <button                         
+                                    onClick={handleReservation}
+                                    disabled={!selectedTable || !!pendingTable}
+                                >
+                                    จองโต๊ะ
+                                </button>
+                        </div>
+
+                        <div className="tableReserveForm">
+                            <button                         
+                                onClick={handleConfirm}
+                                disabled={!pendingTable}
+                            >
+                                ยืนยันการจอง
+                            </button>
+                        </div>
+
+                        <div className="tableReserveForm">
+                            <button                         
+                                    onClick={handleCancel}
+                                    disabled={!pendingTable && dbTables[selectedTable]?.status !== 'occupied'}
+                            >
+                                ยกเลิกการจอง
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        </div>
     </>
   )
 }

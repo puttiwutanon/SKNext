@@ -13,12 +13,12 @@ function SKNext() {
             <h1>SKNext</h1>
           </div>
 
-          <div class="schedule-container">
+          {/* <div class="schedule-container">
             <h2>ตารางเรียน (Class Schedule)</h2>
             
             <div class="schedule-grid">
               <div class="corner"></div>
-              
+          
               <div class="time-header">1 <span>08:30-09:20</span></div>
               <div class="time-header">2 <span>09:20-10:10</span></div>
               <div class="time-header">3 <span>10:10-11:00</span></div>
@@ -94,7 +94,7 @@ function SKNext() {
 
             <div className="subjects">
               <h2>รายชื่อวิชา</h2>
-            </div>
+            </div> */}
 
             <div className="activities">
               <h2>รายชื่อกิจกรรม</h2>
