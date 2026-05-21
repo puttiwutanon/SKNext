@@ -279,6 +279,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 8rem;
         margin-top: 1rem;
         h2{
             color: $text-main;
@@ -292,4 +293,25 @@
             justify-content: center;
         }
     }
+
+    .roomReservationButtonWrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8rem;
+        margin-top: 1rem;
+        h2{
+            color: $text-main;
+            font-weight: 600;
+            font-family: 'Kanit';
+        }
+        .roomReservationButtons{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }
+

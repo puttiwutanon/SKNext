@@ -226,7 +226,7 @@ function TableReservation() {
 
         if (scannedTableCode === pendingTable) {
             const tableRef = doc(db, 'tables', pendingTable);
-            const occupiedUntil = new Date(Date.now() + 1 * 60 * 1000);
+            const occupiedUntil = new Date(Date.now() + 25 * 60 * 1000);
             
             await updateDoc(tableRef, {
                 status: 'occupied',

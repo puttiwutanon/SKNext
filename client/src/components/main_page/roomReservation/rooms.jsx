@@ -6,6 +6,7 @@ function Rooms({ selectedRoom, onSelectRoom, dbRooms }) {
   return (
     <div className="room-grid">
         {rooms.map((code) => {
+            const status = dbRooms[code]?.status || 'available';
                 return (
                 <div
                     key={code}

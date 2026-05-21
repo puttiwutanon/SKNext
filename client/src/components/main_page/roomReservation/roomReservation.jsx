@@ -4,7 +4,7 @@ import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../../firebase/firebaseConfig';
 import Rooms from './rooms';
 
-const ROOMS_COLLECTION = 'InpireCommunityRooms';           // Firestore collection name
+const ROOMS_COLLECTION = 'InspireCommunityRooms';           // Firestore collection name
 const QR_PARAM = 'room';                    // URL param in QR codes: ?room=R1
 const OCCUPIED_DURATION_MS = 60 * 60 * 1000; // 1 hour per booking
 const COUNTDOWN_SECONDS = 600; // 10 minutes to confirm booking
@@ -280,41 +280,59 @@ function RoomReservation() {
                     </a>
                     <h1>การจองห้องใน Inspire Community</h1>
                 </div>
-                <Rooms/>
-            </div>
+                <Rooms selectedRoom={selectedRoom} onSelectRoom={handleSelectRoom} dbRooms={dbRooms}/>
 
                 <div className="roomReservationButtonWrapper">
                     <div>
-                        <h2>โต๊ะที่เลือก: {selectedTable ?? 'ยังไม่ได้เลือก'}</h2>
+                        <h2>ห้องที่เลือก: {selectedRoom ?? 'ยังไม่ได้เลือก'}</h2>
 
-                        <h2 style={{ display: pendingTable && timeLeft !== null ? 'block' : 'none' }}>
-                            โต๊ะ {pendingTable} — กรุณายืนยันภายใน: {formatTime(timeLeft)}
+                        <h2 style={{ display: pendingRoom && timeLeft !== null ? 'block' : 'none' }}>
+                            ห้อง {pendingRoom} — กรุณายืนยันภายใน: {formatTime(timeLeft)}
                         </h2>
 
                         {(() => {
-                            const tableData = dbTables[selectedTable];
-                            if (!tableData || tableData.status !== 'occupied') return null;
-                            const occupiedUntil = tableData.occupiedUntil?.toDate?.();
+                            const roomData = dbRooms[selectedRoom];
+                            if (!roomData || roomData.status !== 'occupied') return null;
+                            const occupiedUntil = roomData.occupiedUntil?.toDate?.();
                             if (!occupiedUntil) return null;
                             const secondsLeft = Math.max(0, Math.floor((occupiedUntil - Date.now()) / 1000));
-                            return <h2>โต๊ะ {selectedTable} — สามารถใช้งานได้อีก: {formatTime(secondsLeft)}</h2>;
+                            return <h2>ห้อง {selectedRoom} — สามารถใช้งานได้อีก: {formatTime(secondsLeft)}</h2>;
                         })()}
 
                     </div>
+
+                    <div className="notes-1">
+                        <h3>ระเบียบการใช้ศูนย์ Inspire Community:</h3>
+                        <p>1) ศูนย์ Inspire Community เป็นศูนย์การเรียนรู้ที่ครู นักเรียน และบุคลากรทางการศึกษา โรงเรียนสวนกุหลาบวิทยาลัย นนทบุรี ทุกคน สามารถใช้บริการได้</p>
+                        <p>2) ในวันทำการ ศูนย์ Inspire Community เปิดเวลา 08.30 น. และปิดเวลา 16.30 น. โดยครูสามารถนำนักเรียนมาใช้บริการที่ศูนย์การเรียนรู้ได้ โดยไม่เสียค่าบริการ สำหรับวันเสาร์ วันอาทิตย์ หรือวันหยุดนักขัตฤกษ์ เปิดตามความจำเป็น</p>
+                        <p>3) โรงเรียนมอบให้งานอาคารสถานที่ฯ กลุ่มบริหารทั่วไป เป็นผู้ดูแลให้บริการ เปิด – ปิด ศูนย์การเรียนรู้</p>
+                        <ul>
+                            <p>4) ในกรณีที่ครูมีการจัดการเรียนการสอนพิเศษ แบบเก็บค่าบริการ ให้ดำเนินการ ดังนี้</p>
+                            <li>&emsp;4.1) ดำเนินการจ่ายค่าบริการ ชั่วโมงละ 100 บาท / ห้อง ที่ห้องการเงิน อาคาร สธ.10 ชั้น 1</li>
+                            <li>&emsp;4.2) นำหลักฐานการจ่ายค่าบริการที่ชำระเรียบร้อยแล้วที่ห้องการเงิน มาแสดงในวันขอเข้าใช้บริการ ให้กับหัวหน้างานอาคารฯ เพื่อดำเนินการเปิดห้อง</li>
+                        </ul>
+                        <p>5) ห้ามนำอาหาร ขนม เครื่องดื่ม (ยกเว้นน้ำดื่ม) มารับประทานในห้องเรียน</p>
+                        <p>6) ไม่อนุญาตให้เคลื่อนย้าย โต๊ะ - เก้าอี้ ออกจากห้องเรียน</p>
+                        <p>7) ห้ามนำสัตว์เลี้ยงทุกชนิดเข้ามาในห้องเรียน หากพบเห็นสุนัข หรือสัตว์อื่นเข้ามาในห้องเรียน ให้แจ้งแม่บ้านหรือเจ้าหน้าที่บริการประจำพื้นที่ ทันที</p>
+                        <p>8) หากพบอุปกรณ์ภายในห้องเกิดการชำรุดเสียหาย ให้แจ้งหัวหน้างานอาคารสถานที่ฯ ทันที</p>
+                        <p>9) หากไม่ปฏิบัติตามข้อกำหนดของการใช้ ศูนย์ Inspire Community ขอของให้งดให้บริการในครั้งต่อไป</p>
+                        <h4>(โทร) 082-971-5142 ครูอุดม ทาเลิศ หัวหน้างานอาคารสถานที่ฯ กลุ่มบริหารทั่วไป</h4>
+                    </div>
+
                     <div className="tableReservationButtons">
                         <div className="tableReserveForm">
                                 <button                         
                                     onClick={handleReservation}
-                                    disabled={!selectedTable || !!pendingTable}
+                                    disabled={!selectedRoom || !!pendingRoom}
                                 >
-                                    จองโต๊ะ
+                                    จองห้อง
                                 </button>
                         </div>
 
                         <div className="tableReserveForm">
                             <button                         
                                 onClick={handleConfirm}
-                                disabled={!pendingTable}
+                                disabled={!pendingRoom}
                             >
                                 ยืนยันการจอง
                             </button>
@@ -323,14 +341,68 @@ function RoomReservation() {
                         <div className="tableReserveForm">
                             <button                         
                                     onClick={handleCancel}
-                                    disabled={!pendingTable && dbTables[selectedTable]?.status !== 'occupied'}
+                                    disabled={!pendingRoom && dbRooms[selectedRoom]?.status !== 'occupied'}
                             >
                                 ยกเลิกการจอง
                             </button>
                         </div>
+
+                        <div className="scanQRtoConfirm">
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+
+            {showQRPopup && (
+                <div className="qr-popup-overlay" onClick={handleClosePopup}>
+                    <div className="qr-popup" onClick={e => e.stopPropagation()}>
+                        <button className="qr-popup-close" onClick={handleClosePopup}>✕</button>
+ 
+                        <h2>สแกน QR Code เพื่อยืนยัน</h2>
+                        <p>โต๊ะที่จอง: <strong>{pendingRoom}</strong></p>
+ 
+                        {timeLeft !== null && !scannedData && (
+                            <p className={`qr-countdown ${timeLeft <= 60 ? 'urgent' : ''}`}>
+                                เวลาที่เหลือ: {formatTime(timeLeft)}
+                            </p>
+                        )}
+ 
+                        {/* Camera viewport */}
+                        <div className="qr-scanner-viewport">
+                            {scannedData ? (
+                                <div className="qr-success-state">
+                                    <span className="qr-success-icon">✓</span>
+                                    <p>สแกนสำเร็จ</p>
+                                </div>
+                            ) : cameraError ? (
+                                <p className="qr-error">{cameraError}</p>
+                            ) : (
+                                <>
+                                    <video
+                                        ref={videoRef}
+                                        className="qr-video"
+                                        muted
+                                        playsInline
+                                    />
+                                    {/* Hidden canvas for frame analysis */}
+                                    <canvas ref={canvasRef} style={{ display: 'none' }} />
+                                    {/* Corner markers overlay */}
+                                    <div className="qr-scanner-corner top-left" />
+                                    <div className="qr-scanner-corner top-right" />
+                                    <div className="qr-scanner-corner bottom-left" />
+                                    <div className="qr-scanner-corner bottom-right" />
+                                    <div className="qr-scan-line" />
+                                    <p className="qr-hint">วางกล้องให้ตรง QR Code</p>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
-        </div>
+            )}
     </>
   )
 }

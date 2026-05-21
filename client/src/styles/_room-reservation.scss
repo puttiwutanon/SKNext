@@ -114,9 +114,17 @@
 
 .notes-1{
     align-self: center;
+    margin-top: 1rem;
+    color: $text-main;
+    font-weight: 500;
+    font-family: 'Kanit';
+    background-color: #F1F5FB;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: $radius;
 }
 
-.tableReservationButtonWrapper{
+.roomReservationButtonWrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,7 +135,7 @@
         font-weight: 600;
         font-family: 'Kanit';
     }
-    .tableReservationButtons{
+    .roomReservationButtons{
         display: flex;
         flex-direction: row;
         align-items: center;
