@@ -34,12 +34,28 @@ function LoginForm() {
             <h1>เข้าสู่ระบบ</h1>
             <form action="" className="authform-email" onSubmit={handleLogin}>
                 <div className="text-input">
-                    <label htmlFor="">อีเมล</label>
-                    <input type="text" placeholder='กรุณาใส่อีเมล'value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <label htmlFor="email">อีเมล</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        autoComplete="email" 
+                        id="email" 
+                        placeholder='กรุณาใส่อีเมล'
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </div>
                 <div className="text-input">
-                    <label htmlFor="">รหัสผ่าน</label>
-                    <input type="password" placeholder='กรุณาใส่รหัสผ่าน' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <label htmlFor="password">รหัสผ่าน</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        autoComplete="current-password" 
+                        id='password' 
+                        placeholder='กรุณาใส่รหัสผ่าน' 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </div>
                 <button>
                     {loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
